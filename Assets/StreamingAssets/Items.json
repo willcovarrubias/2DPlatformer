@@ -1,0 +1,57 @@
+
+[
+	{
+		"id": 1,
+		"title": "Pickup item 1",
+		"value": 6,
+		"slug": "01"
+	},
+	{
+		"id": 2,
+		"title": "Pickup item 2",
+		"value": 6,
+		"slug": "08"
+	},
+	{
+		"id": 3,
+		"title": "Mega Gloves",
+		"value": 6,
+		"slug": "03"
+	},
+	{
+		"id": 4,
+		"title": "Caca Gloves",
+		"value": 6,
+		"slug": "04"
+	},
+	{
+		"id": 5,
+		"title": "LOL Gloves",
+		"value": 6,
+		"slug": "05"
+	},
+	{
+		"id": 6,
+		"title": "Angry Gloves",
+		"value": 6,
+		"slug": "Num07"
+	},
+	{
+		"id": 7,
+		"title": "Silly Gloves",
+		"value": 6,
+		"slug": "Num08"
+	},
+	{
+		"id": 8,
+		"title": "ORZ Gloves",
+		"value": 6,
+		"slug": "Num09"
+	},
+	{
+		"id": 9,
+		"title": "Bleh Gloves",
+		"value": 6,
+		"slug": "Num010"
+	}
+]

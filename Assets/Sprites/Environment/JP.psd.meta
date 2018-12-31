@@ -1,0 +1,113 @@
+fileFormatVersion: 2
+guid: 803b83f0c7684ce488ce7e9c9f251d0f
+timeCreated: 1468362215
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: JP_0
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 1
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  cubemapConvolution: 0
+  cubemapConvolutionSteps: 7
+  cubemapConvolutionExponent: 1.5
+  seamlessCubemap: 0
+  textureFormat: -1
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: -1
+    aniso: 16
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  rGBM: 0
+  compressionQuality: 50
+  allowsAlphaSplitting: 0
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: JP_0
+      rect:
+        serializedVersion: 2
+        x: 688
+        y: 416
+        width: 334
+        height: 404
+      alignment: 9
+      pivot: {x: 0.3674585, y: 0.11011188}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 185.26886, y: 6.514801}
+        - {x: 190.26886, y: 30.514801}
+        - {x: 197.26886, y: 40.5148}
+        - {x: 209.26886, y: 65.5148}
+        - {x: 211.26886, y: 75.5148}
+        - {x: 211.26886, y: 80.5148}
+        - {x: 210.26886, y: 96.5148}
+        - {x: 204.26886, y: 116.5148}
+        - {x: 200.26886, y: 140.5148}
+        - {x: 208.26886, y: 148.5148}
+        - {x: 207.26886, y: 180.5148}
+        - {x: 211.26886, y: 197.5148}
+        - {x: 211.26886, y: 236.5148}
+        - {x: 209.26886, y: 247.5148}
+        - {x: 196.26886, y: 276.5148}
+        - {x: 181.26886, y: 305.5148}
+        - {x: 160.26886, y: 322.5148}
+        - {x: 140.26886, y: 337.5148}
+        - {x: 92.26886, y: 353.5148}
+        - {x: 56.26886, y: 359.5148}
+        - {x: 0.26885986, y: 359.5148}
+        - {x: -27.73114, y: 349.5148}
+        - {x: -74.73114, y: 341.5148}
+        - {x: -107.73114, y: 313.5148}
+        - {x: -114.73114, y: 294.5148}
+        - {x: -119.73114, y: 275.5148}
+        - {x: -119.73114, y: 237.5148}
+        - {x: -122.73114, y: 226.5148}
+        - {x: -122.73114, y: 176.5148}
+        - {x: -118.73114, y: 155.5148}
+        - {x: -109.73114, y: 124.5148}
+        - {x: -98.73114, y: 93.5148}
+        - {x: -80.73114, y: 65.5148}
+        - {x: -55.73114, y: 44.5148}
+        - {x: -39.73114, y: 6.514801}
+        - {x: -35.73114, y: 3.514801}
+        - {x: -20.73114, y: -5.485199}
+        - {x: 39.26886, y: -35.4852}
+        - {x: 54.26886, y: -43.4852}
+        - {x: 62.26886, y: -44.4852}
+        - {x: 97.26886, y: -44.4852}
+        - {x: 121.26886, y: -31.485199}
+        - {x: 136.26886, y: -28.485199}
+        - {x: 177.26886, y: -5.485199}
+    outline: []
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

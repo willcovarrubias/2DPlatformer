@@ -1,0 +1,69 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 2
+  tags:
+  - Through
+  - PlayerMana
+  - Camera
+  - ActiveItem
+  - Inventory
+  - PlayerHealth
+  - MeleeWeapon
+  - PlayerProjectile
+  - New tag
+  - DevUI
+  - Wall
+  - GrabWall
+  - Enemy
+  - TempBoundary
+  - BossHealthCanvas
+  - BossHealth
+  - FarBackground
+  - MiddleBackground
+  - NearBackground
+  - Foreground
+  - Floor
+  - Spikes
+  - EnemyProjectile
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - 
+  - Water
+  - UI
+  - 
+  - 
+  - Surface
+  - Player
+  - Enemy
+  - Obstacles
+  - Projecttiles
+  - MeleeHitBox
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  m_SortingLayers:
+  - name: Background
+    uniqueID: 1716957163
+    locked: 0
+  - name: Default
+    uniqueID: 0
+    locked: 0
