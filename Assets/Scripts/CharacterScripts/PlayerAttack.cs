@@ -332,12 +332,12 @@ public class PlayerAttack : MonoBehaviour {
             }
             if (attackToUse == 2)
             {
-                _animator.Play("Melee2");
+                _animator.Play("Melee3");
                 Debug.Log("Attacking! 3");
             }
         }else
         {
-            _animator.Play("Melee3");
+            _animator.Play("CrouchMelee");
             meleeTriggerHitBoxHorizontal.enabled = true;
         }        
     }

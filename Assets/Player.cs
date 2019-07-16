@@ -34,13 +34,14 @@ public class Player : MonoBehaviour
     bool alreadyJumped;
     bool doubleJumpIsOn;
     bool landed;
-    float dodgeSpeed;
-    private float dodgeRate = .75f;
+    public float slideSpeed;
+    public float dodgeBackSpeed;
+    private float dodgeRate = .5f;
+    private float slideRate = .75f;
     private float nextDodge;
     public float dodgeDuration = 10f;
     public bool takingDamage = false;
     public bool playerisDead = false;
-
     
     public bool onTheGround;
     public bool slidingAgainstAWall;
@@ -60,11 +61,7 @@ public class Player : MonoBehaviour
     public int[] CharacterIdentifier;
 
     private PlayerAttack playerAttack;
-
-    
-
-
-
+       
     public bool GetCurrentlyDodging()
     {
         return currentlyDodging;
@@ -78,28 +75,19 @@ public class Player : MonoBehaviour
     void Start()
     {
         wallJumpClimb = new Vector2(200, 360);
-        //90 / 225
         controller = GetComponent<Controller2D>();
 
         gravity = -(2 * maxJumpHeight) / Mathf.Pow(timeToJumpApex, 2);
         maxJumpVelocity = Mathf.Abs(gravity) * timeToJumpApex;
         minJumpVelocity = Mathf.Sqrt(2 * Mathf.Abs(gravity) * minJumpHeight);
         print("Gravity: " + gravity + "  Jump Velocity: " + maxJumpVelocity);
-
-        //test
         anim = GetComponent<Animator>();
         playerAttack = GetComponent<PlayerAttack>();
         
     }
 
     void Update()
-    {
-
-       
-
-
-
-
+    {   
         if (GameMaster.gameMaster.isPaused == false && !GameMaster.gameMaster.inACutscene)
         {
             Vector2 input;
@@ -114,18 +102,17 @@ public class Player : MonoBehaviour
             
             int wallDirX = (controller.collisions.left) ? -1 : 1;
 
-            if (velocity.x > 0)
+            if (input.x > 0)
                 FaceRight();
-            else if (velocity.x < 0)
+            else if (input.x < 0)
                 FaceLeft();
 
             float targetVelocityX = input.x * moveSpeed;
-            //test
             float targetVelocityY = input.y * moveSpeed;
 
             anim.SetFloat("Velocity", Mathf.Abs(targetVelocityX));
 
-
+            //Check if player is on the ground.
             if (controller.collisions.below)
             {
                 onTheGround = true;
@@ -148,16 +135,12 @@ public class Player : MonoBehaviour
 
 
             //This If statement determines whether or not wall jumping happens.
+            //WALL HUGGING LOGIC
             if ((controller.collisions.left || controller.collisions.right) && !controller.collisions.below && velocity.y < 0)
-            {
-
-                
-
+            {           
                 wallSliding = true;
 
                 slidingAgainstAWall = true;
-                //anim.SetBool("Wallhugging", true);
-                //anim.Play("Wallhugging");
                 anim.SetBool("Wallhugging", true);
 
                 if (velocity.y < -wallSlideSpeedMax)
@@ -210,8 +193,8 @@ public class Player : MonoBehaviour
             }
 
             
-            //Jumping logic.
-            if (Input.GetButtonDown("Jump") && input.y != -1 &&  !playerAttack.currentlySwitchingAnimator && !takingDamage && !playerisDead)
+            //JUMPING logic.
+            if (Input.GetButtonDown("Jump") &&  !playerAttack.currentlySwitchingAnimator && !takingDamage && !playerisDead)
             {
                 if (wallSliding)
                 {
@@ -231,7 +214,7 @@ public class Player : MonoBehaviour
                         velocity.y = wallLeap.y;
                     }
                 }
-                if (controller.collisions.below)
+                if (controller.collisions.below && input.y != -1)
                 {
                     JumpDust();
                     velocity.y = maxJumpVelocity;
@@ -239,9 +222,7 @@ public class Player : MonoBehaviour
                     anim.SetBool("Jumping", true);
                     anim.SetBool("Ducking", false);
 
-                }
-
-               
+                }               
 
                 //Double jump
                 //if double jump enabled etc.
@@ -255,10 +236,6 @@ public class Player : MonoBehaviour
                         Debug.Log("Double jump being called!");
                         JumpDust();
                     }
-
-
-
-
                 }
 
             }
@@ -269,15 +246,9 @@ public class Player : MonoBehaviour
                     velocity.y = minJumpVelocity;
                     
                 }
-            }
+            }           
 
-           
-            
-
-           
-
-            //test: dodges/dash/rolls
-            //quick teleports that go left and right
+            //Quick teleports that go left and right
             /*
             if (controller.collisions.below && Input.GetKeyDown(KeyCode.E) && input.x > 0)
             {
@@ -290,7 +261,7 @@ public class Player : MonoBehaviour
                 Debug.Log("Testing dodges!");
             }*/
 
-            //Test:: simpler dodge. I can set the dodgeSpeed via code and whether or not dodges are allowed.
+            //Example of how to use triggers.
             //If dodges are allowed, do the following:
             /*if (controller.collisions.below && Input.GetAxisRaw("Triggers") > 0.001 && input.x > 0 && controller.collisions.right == false)
             {
@@ -305,59 +276,9 @@ public class Player : MonoBehaviour
                 anim.SetBool("Dodging", true);
                 Debug.Log("I'm hitting the dash button!");
             }*/
-
-
-
-
-
-
-            //Working Dodge timer
-            /*
-            if (Time.timeScale == 0)
-                return;
-
-            if (input.x > 0 && onTheGround && Input.GetButtonDown("Dodge") && GetCurrentlyDodging() == false)
-            {
-                dodgeSpeed = 400;
-                velocity.x = dodgeSpeed;
-                anim.Play("Dodging");
-                SetCurrentlyDodging(true);
-
-            }
-            else
-            {
-                if (input.x > 0 && onTheGround && Input.GetButtonDown("Dodge") && Time.time > timeToDodge)
-                {
-                    SetCurrentlyDodging(false);
-                    timeToDodge = Time.time + 1;
-
-                }
-            }
-
-
-
-                    //if (controller.collisions.below && Input.GetAxisRaw("Triggers") != 0 && input.x < 0 && controller.collisions.left == false)
-            if (input.x < 0 && onTheGround && Input.GetButtonDown("Dodge") && GetCurrentlyDodging() == false)
-            {
-                        //anim.SetBool("Dodging", true);
-                dodgeSpeed = 400;
-                velocity.x = -dodgeSpeed;
-                anim.Play("Dodging");
-                SetCurrentlyDodging(true);
-            }
-            else
-            {
-                if (input.x < 0 && onTheGround && Input.GetButtonDown("Dodge") && Time.time > timeToDodge)
-                {
-                    timeToDodge = Time.time + 1;
-                    SetCurrentlyDodging(false);
-                }
-            }
-            */
-
-
-
+                                  
             //test Flight
+            //TODO: Fix animations for when the character can fly. Possibly replace the AnimatorController.
             if (flightOn == true)
             {
                 if (input.y > 0)
@@ -366,7 +287,7 @@ public class Player : MonoBehaviour
                     velocity.y = targetVelocityY;
                 else
                     velocity.y = 0;
-                //test
+
                 velocity.y = Mathf.SmoothDamp(velocity.y, targetVelocityY, ref velocityXSmoothing, 0, 0);
                 velocity.x = targetVelocityX;
             }
@@ -379,17 +300,11 @@ public class Player : MonoBehaviour
 
             //Moves the character.
             controller.Move(velocity * Time.deltaTime, input);
-    
-
-         
-
 
             //Sets animator for jumping animations.
             if (controller.collisions.below)
             {
                 velocity.y = 0;
-
-                //test
                 anim.SetBool("Jumping", false);
 
             }
@@ -397,9 +312,9 @@ public class Player : MonoBehaviour
             if (!controller.collisions.below && velocity.y < 0)
                 anim.SetBool("Jumping", true);
 
-
-
-            //test
+            
+            //Test for flight.
+            //TODO: Remove once a flight item is implemented and flight animations are added.
             if (Input.GetKeyDown(KeyCode.N))
             {
                 flightOn = true;
@@ -408,12 +323,10 @@ public class Player : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.M))
                 flightOn = false;
 
+            //Test for specials. 
+            //TODO: Add other logic to specials, like restrict movement perhaps?
             if (Input.GetKeyDown(KeyCode.B))
-                anim.Play("ShortySpecial");
-
-
-
-            
+                anim.Play("ShortySpecial");            
             
             
         }
@@ -422,16 +335,19 @@ public class Player : MonoBehaviour
     public void FixedUpdate()
     {
         Vector2 input = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
+        Vector3 theScale = tf.localScale;
+        
 
         if (Time.time > nextDodge && !playerisDead)
         {
 
-            if (!facingRight && (onTheGround && velocity.y == 0) && Input.GetButtonDown("Dodge") && !Input.GetButtonDown("Jump") && !playerAttack.currentlySwitchingAnimator)
+            //Sliding logic.
+            if (!facingRight && (onTheGround && velocity.y == 0) && Input.GetButtonDown("Slide") && !Input.GetButtonDown("Jump") && !playerAttack.currentlySwitchingAnimator)
             {
                 SlideLeft();
 
             }
-            else if (facingRight && (onTheGround && velocity.y == 0) && Input.GetButtonDown("Dodge") && !Input.GetButtonDown("Jump") && !playerAttack.currentlySwitchingAnimator)
+            else if (facingRight && (onTheGround && velocity.y == 0) && Input.GetButtonDown("Slide") && !Input.GetButtonDown("Jump") && !playerAttack.currentlySwitchingAnimator)
             {
                 SlideRight();
             }
@@ -440,43 +356,54 @@ public class Player : MonoBehaviour
                 SetCurrentlyDodging(false);
             }
 
-            if (controller.collisions.below && Input.GetButtonDown("Bash") && facingRight && !playerAttack.currentlySwitchingAnimator && playerAttack.currentlyInMeleeMode)
+            //Dodge logic.
+            if (facingRight)
             {
-                
-                    dodgeSpeed = 500;
-                    velocity.x = dodgeSpeed;
+                if (controller.collisions.below && Input.GetButtonDown("Dodge_R") && !playerAttack.currentlySwitchingAnimator && playerAttack.currentlyInMeleeMode)
+                {
+                    velocity.x = slideSpeed;
+                    anim.Play("DodgeForward");
+                    // m_isAxisInUse = true;
+                    nextDodge = Time.time + dodgeRate;
+                    Invoke("JumpDust", .1f);
+
+                }
+                if (controller.collisions.below && Input.GetButtonDown("Dodge_L") && !playerAttack.currentlySwitchingAnimator && playerAttack.currentlyInMeleeMode && input.x == 0)
+                {
+
+                    velocity.x = -dodgeBackSpeed;
                     anim.Play("DodgeBack");
                     // m_isAxisInUse = true;
                     nextDodge = Time.time + dodgeRate;
                     Invoke("JumpDust", .1f);
 
-                
 
-                //anim.SetBool("Dodging", true);
+                }
             }
+            else
+            {
+                if (controller.collisions.below && Input.GetButtonDown("Dodge_R") && !playerAttack.currentlySwitchingAnimator && playerAttack.currentlyInMeleeMode && input.x == 0)
+                {
+                    velocity.x = dodgeBackSpeed;
+                    anim.Play("DodgeBack");
+                    // m_isAxisInUse = true;
+                    nextDodge = Time.time + dodgeRate;
+                    Invoke("JumpDust", .1f);
+
+                }
+                if (controller.collisions.below && Input.GetButtonDown("Dodge_L") && !playerAttack.currentlySwitchingAnimator && playerAttack.currentlyInMeleeMode)
+                {
+                    velocity.x = -slideSpeed;
+                    anim.Play("DodgeForward");
+                    // m_isAxisInUse = true;
+                    nextDodge = Time.time + dodgeRate;
+                    Invoke("JumpDust", .1f);
+
+                }
+            }            
 
             //Example of using Triggers as buttons.
             //if (controller.collisions.below && Input.GetAxis("Triggers") < 0 && !playerAttack.currentlySwitchingAnimator && playerAttack.currentlyInMeleeMode)
-            if (controller.collisions.below && Input.GetButtonDown("Bash") && !facingRight && !playerAttack.currentlySwitchingAnimator && playerAttack.currentlyInMeleeMode)
-
-            {
-                
-                    dodgeSpeed = 500;
-                    velocity.x = -dodgeSpeed;
-                    anim.Play("DodgeBack");
-                    // m_isAxisInUse = true;
-                    nextDodge = Time.time + dodgeRate;
-                    Invoke("JumpDust", .1f);
-                
-
-                //anim.SetBool("Dodging", true);
-            } 
-
-            /*if (Input.GetAxisRaw("Triggers") == 0)
-            {
-                m_isAxisInUse = false;
-            }*/
-
         }
     }
 
@@ -503,9 +430,8 @@ public class Player : MonoBehaviour
 
     void SlideRight()
     {
-        nextDodge = Time.time + dodgeRate;
-        dodgeSpeed = 500;
-        velocity.x = dodgeSpeed;
+        nextDodge = Time.time + slideRate;
+        velocity.x = slideSpeed;
         anim.Play("Dodging");
         Debug.Log("Dodging right!");
         SetCurrentlyDodging(true);
@@ -515,9 +441,8 @@ public class Player : MonoBehaviour
     void SlideLeft()
     {
         SetCurrentlyDodging(true);
-        nextDodge = Time.time + dodgeRate;
-        dodgeSpeed = 500;
-        velocity.x = -dodgeSpeed;
+        nextDodge = Time.time + slideRate;
+        velocity.x = -slideSpeed;
         anim.Play("Dodging");
         Debug.Log("Dodging left!");
         JumpDust();
