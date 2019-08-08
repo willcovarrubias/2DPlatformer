@@ -33,8 +33,8 @@ public class ArmorSceneExpBarController : MonoBehaviour {
 
     public void SetExpBarOnHover(int allArmorIndex)
     {
-        float calc_EXP = (float)GameMaster.gameMaster.allArmorExp[allArmorIndex] / (float)armorManager.SetActiveArmor(allArmorIndex).ExpToCap;
-        Debug.Log("Current EXP: " + GameMaster.gameMaster.allArmorExp[allArmorIndex] + ". And EXP to CAP: " + armorManager.SetActiveArmor(allArmorIndex).ExpToCap);
+        float calc_EXP = (float)GameMaster.gameMaster.allArmorExp[allArmorIndex] / (float)armorManager.GetActiveArmor(allArmorIndex).ExpToCap;
+        Debug.Log("Current EXP: " + GameMaster.gameMaster.allArmorExp[allArmorIndex] + ". And EXP to CAP: " + armorManager.GetActiveArmor(allArmorIndex).ExpToCap);
         SetEXPBar(calc_EXP);
 
     }

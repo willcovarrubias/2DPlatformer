@@ -19,7 +19,7 @@ public class Player : MonoBehaviour
     public Vector2 wallLeap;
 
     public float wallSlideSpeedMax = 3;
-    public float wallStickTime = .25f;
+    public float wallStickTime = 1f;
     float timeToWallUnstick;
 
     float gravity;
@@ -137,7 +137,14 @@ public class Player : MonoBehaviour
             //This If statement determines whether or not wall jumping happens.
             //WALL HUGGING LOGIC
             if ((controller.collisions.left || controller.collisions.right) && !controller.collisions.below && velocity.y < 0)
-            {           
+            {
+
+                if (controller.collisions.left)
+                    FaceLeft();
+                if (controller.collisions.right)
+                    FaceRight();
+
+
                 wallSliding = true;
 
                 slidingAgainstAWall = true;
@@ -202,6 +209,8 @@ public class Player : MonoBehaviour
                     {
                         velocity.x = -wallDirX * wallJumpClimb.x;
                         velocity.y = wallJumpClimb.y;
+                        anim.Play("WallLeap");
+                        JumpDust();
                     }
                     else if (input.x == 0)
                     {
@@ -213,6 +222,8 @@ public class Player : MonoBehaviour
                         velocity.x = -wallDirX * wallLeap.x;
                         velocity.y = wallLeap.y;
                     }
+
+                    
                 }
                 if (controller.collisions.below && input.y != -1)
                 {

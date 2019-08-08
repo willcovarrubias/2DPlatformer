@@ -59,12 +59,12 @@ public class PlayerStatsToDisplay : MonoBehaviour {
 		//	defense = GameMaster.gameMaster.base_char3Def;
 		}
 
-        Debug.Log(GameMaster.gameMaster.curHP);
-        Debug.Log(GameMaster.gameMaster.curMP);
-        Debug.Log(GameMaster.gameMaster.curAttack);
-        Debug.Log(GameMaster.gameMaster.curSpAttack);
-        Debug.Log(GameMaster.gameMaster.curDefense);
-        Debug.Log(GameMaster.gameMaster.curSpeed);
+        //Debug.Log(GameMaster.gameMaster.curHP);
+        //Debug.Log(GameMaster.gameMaster.curMP);
+        //Debug.Log(GameMaster.gameMaster.curAttack);
+        //Debug.Log(GameMaster.gameMaster.curSpAttack);
+        //Debug.Log(GameMaster.gameMaster.curDefense);
+        //Debug.Log(GameMaster.gameMaster.curSpeed);
 
 
 

@@ -1,0 +1,27 @@
+
+[
+	{
+		"id": 0,
+		"type": "Character1",
+		"title": "Starting character.",
+		"life": 20,
+		"mana": 20,
+		"attack": 5,
+		"magicAttack": 5,
+		"defense": 10,
+		"speed": 40
+	},
+	{
+		"id": 1,
+		"type": "Character2",
+		"title": "Second character.",
+		"life": 20,
+		"mana": 20,
+		"attack": 5,
+		"magicAttack": 5,
+		"defense": 10,
+		"speed": 40
+	}
+	
+	
+]

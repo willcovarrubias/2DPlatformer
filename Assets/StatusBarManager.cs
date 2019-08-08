@@ -15,11 +15,11 @@ public class StatusBarManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        float calc_HP = (float)GameMaster.gameMaster.curHP / (float)GameMaster.gameMaster.maxHP;
-        UpdateLifeBar(calc_HP);
+        //float calc_HP = (float)GameMaster.gameMaster.curHP / (float)GameMaster.gameMaster.maxHP;
+        //UpdateLifeBar(calc_HP);
 
-        float calc_MP = (float)GameMaster.gameMaster.curMP / (float)GameMaster.gameMaster.maxMP;
-        UpdateManaBar(calc_MP);
+        //float calc_MP = (float)GameMaster.gameMaster.curMP / (float)GameMaster.gameMaster.maxMP;
+        //UpdateManaBar(calc_MP);
     }
 
     void UpdateLifeBar(float myHP)

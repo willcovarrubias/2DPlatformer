@@ -1,6 +1,8 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class CurrentCharacterStats : MonoBehaviour {
@@ -18,25 +20,58 @@ public class CurrentCharacterStats : MonoBehaviour {
     Player player;
     Rigidbody2D rigidBody;
     Animator anim;
+
+    CharacterManager characterManager;
+    ArmorManager armorManager;
+
     //public int numberOfBodyParts = 15;
     public GameObject[] visualWhereRendererIs;
     public Color collideColor, normalColor;
     SpriteRenderer[] renderer = new SpriteRenderer[15];
+    private string sceneName;
 
 
     public Text statsText;
 
-    //characterAttributes
-    public int maxLife, currentLife, maxMana, currentMana, attack, magicAttack, defense, speed;
+
+    //Base character attritbutes.
+    public int maxHP, currentHP, maxMP, currentMP, attack, magicAttack, defense, speed;
+
+    //Modded character stats from armor.
+    private int hpFromArmor;
+
+    private int activeWeapon, activeRanged, activeHelm, activeBody, activeHands, activeLegs, activeAcc;
 
     public float iFrameTimer = 2f;
 
+    private void Awake()
+    {
+        
+
+        
+    }
+
     void Start () {
+
         statsText = GameObject.FindGameObjectWithTag("DevUI").GetComponent<Text>();
         controller = GetComponent<Controller2D>();
         player = GetComponent<Player>();
         rigidBody = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
+
+        characterManager = GameObject.FindGameObjectWithTag("GM").GetComponent<CharacterManager>();
+        armorManager = GameObject.FindGameObjectWithTag("GM").GetComponent<ArmorManager>();
+
+        if (armorManager == null)
+            Debug.Log("Looks like it didn't properly reference the Armor Manager script.");
+
+
+        // Create a temporary reference to the current scene.
+        Scene currentScene = SceneManager.GetActiveScene();
+
+        // Retrieve the name of this scene.
+        sceneName = currentScene.name;
+
         //renderer = visualWhereRendererIs.GetComponent<SpriteRenderer>();
         //visualWhereRendererIs = new GameObject[5];
         for (int i = 0; i < visualWhereRendererIs.Length; i++)
@@ -45,27 +80,35 @@ public class CurrentCharacterStats : MonoBehaviour {
             //Debug.Log("Current renderer: " + renderer[i]);
         }
 
-        ShowUpdateStats();
-        StatSetter();
+        GetStatsFromArmor();
+        InitialStatSetter();
 
     }
-	
-	// Update is called once per frame
-	void Update () {
 
-        StatSetter();
+    private int GetActiveWeapon()
+    {
+        int activeWeapon = PlayerPrefs.GetInt("ActiveWeapon");
+        return activeWeapon;
+        //activeRanged = PlayerPrefs.GetInt("ActiveRanged");
+        //activeHelm = PlayerPrefs.GetInt("ActiveHelm");
+        //activeBody = PlayerPrefs.GetInt("ActiveBody");
+        //activeHands = PlayerPrefs.GetInt("ActiveHands");
+        //activeLegs = PlayerPrefs.GetInt("ActiveLegs");
+        //activeAcc = PlayerPrefs.GetInt("ActiveAcc");
+    }
+
+    void Update () {
+
         ShowUpdateStats();
 
         if (Input.GetKeyDown(KeyCode.Delete))
         {
-            GameMaster.gameMaster.curHP--;
-            StatSetter();
+            currentHP--;
         }
 
         if (Input.GetKeyDown(KeyCode.End))
         {
-            GameMaster.gameMaster.curHP++;
-            StatSetter();
+            currentHP++;
         }
 
         if (Input.GetKeyDown(KeyCode.I))
@@ -74,7 +117,7 @@ public class CurrentCharacterStats : MonoBehaviour {
         }
      
 
-        if (GameMaster.gameMaster.curHP <= 0)
+        if (currentHP <= 0)
         {
             //KillPlayer();
         }
@@ -94,26 +137,47 @@ public class CurrentCharacterStats : MonoBehaviour {
 
     void ShowUpdateStats()
     {
-        statsText.text = "STATS: " +
-        "\nLife: " + GameMaster.gameMaster.maxHP +
-        "\nMana: " + GameMaster.gameMaster.maxMP +
-        "\nAttack: " + GameMaster.gameMaster.curSpAttack +
-        "\nMagicAttack: " + GameMaster.gameMaster.curSpAttack +
-        "\nDefense: " + GameMaster.gameMaster.curDefense +
-        "\nSpeed: " + GameMaster.gameMaster.curSpeed +
-        "\nCurrent Character: " + GameMaster.gameMaster.characterChosen;
+        statsText.text = "Starting Stats: " +
+        "\nLife: " + maxHP + "\nCurrent Life: " + currentHP +
+        "\nMana: " + maxMP + "\nCurrent Mana: " + currentMP +
+        "\nAttack: " + attack +
+        "\nMagicAttack: " + magicAttack +
+        "\nDefense: " + defense +
+        "\nSpeed: " + speed;
     }
 
-    void StatSetter()
+    void InitialStatSetter()
     {
-        maxLife = GameMaster.gameMaster.maxHP;
-        currentLife = GameMaster.gameMaster.curHP;
-        maxMana = GameMaster.gameMaster.maxMP;
-        currentMana = GameMaster.gameMaster.curMP;
-        attack = GameMaster.gameMaster.curAttack;
-        magicAttack = GameMaster.gameMaster.curSpAttack;
-        defense = GameMaster.gameMaster.curDefense;
-        speed = GameMaster.gameMaster.curSpeed;
+        //
+
+        maxHP = characterManager.GetCharacterStats(PlayerPrefs.GetInt("CharacterSelected")).HP + hpFromArmor;        
+        maxMP = characterManager.GetCharacterStats(PlayerPrefs.GetInt("CharacterSelected")).MP;
+        attack = characterManager.GetCharacterStats(PlayerPrefs.GetInt("CharacterSelected")).Attack;
+        magicAttack = characterManager.GetCharacterStats(PlayerPrefs.GetInt("CharacterSelected")).MagicAttack;
+        defense = characterManager.GetCharacterStats(PlayerPrefs.GetInt("CharacterSelected")).Defense;
+        speed = characterManager.GetCharacterStats(PlayerPrefs.GetInt("CharacterSelected")).Speed;
+
+        if (sceneName == "Level1")
+        {
+            currentHP = maxHP;
+            PlayerPrefs.SetInt("CurrentHP", currentHP);
+
+            currentMP = maxMP;
+            PlayerPrefs.SetInt("CurrentMP", currentMP);
+        }
+        else
+        {
+            currentHP = PlayerPrefs.GetInt("CurrentHP");
+            currentMP = PlayerPrefs.GetInt("CurrentMP");
+        }
+        
+
+    }
+
+    void GetStatsFromArmor()
+    {
+        hpFromArmor = armorManager.GetArmorHP(activeWeapon); // + armorManager.GetActiveArmor(activeRanged).Life + armorManager.GetActiveArmor(activeHelm).Life +
+            //armorManager.GetActiveArmor(activeBody).Life + armorManager.GetActiveArmor(activeHands).Life + armorManager.GetActiveArmor(activeLegs).Life + armorManager.GetActiveArmor(activeAcc).Life;
     }
 
     void DamagePlayer(int damage)
@@ -122,7 +186,7 @@ public class CurrentCharacterStats : MonoBehaviour {
         //KnockBack();
         player.takingDamage = true;
         //Debug.Log("Current life: " + currentLife);
-        GameMaster.gameMaster.curHP -= damage;      
+        currentHP -= damage;      
         
     }
 

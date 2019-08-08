@@ -18,7 +18,7 @@ public class ItemDescriptionToggler : MonoBehaviour {
 
 	public void RecallItemInfo(int id)
     {
-        textToDisplay.text = armorManager.SetActiveArmor(id).Title.ToString();
+        textToDisplay.text = armorManager.GetActiveArmor(id).Title.ToString();
     }
 }
 

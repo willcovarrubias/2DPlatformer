@@ -52,12 +52,12 @@ public class Enemy_Main : MonoBehaviour {
             //Camera2DFollow.xPosRestriction = 3;
             //Camera2DFollow.xPosRestrictionRight = 0;
             Debug.Log("Collided with Player's weapon!");
-            DamageEnemy(GameMaster.gameMaster.curAttack);
+           // DamageEnemy(GameMaster.gameMaster.curAttack);
         }
 
         if (other.gameObject.tag == "PlayerProjectile")
         {
-            DamageEnemy(GameMaster.gameMaster.curAttack);
+            //DamageEnemy(GameMaster.gameMaster.curAttack);
             Debug.Log("Collided with Player's weapon!");
         }
     }

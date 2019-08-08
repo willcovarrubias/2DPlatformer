@@ -317,7 +317,7 @@ public class PlayerAttack : MonoBehaviour {
         }
         else if (!player.currentlyDucking)
         {
-            int attackToUse = Random.Range(0, 3);
+            int attackToUse = Random.Range(0, 2);
             meleeTriggerHitBoxHorizontal.enabled = true;
 
             if (attackToUse == 0)

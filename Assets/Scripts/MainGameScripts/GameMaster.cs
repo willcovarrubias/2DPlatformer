@@ -10,23 +10,23 @@ using UnityEngine.UI;
 public class GameMaster : MonoBehaviour {
 
 	public static GameMaster gameMaster;
-	public GameObject PlayerToSpawn;
+	//public GameObject PlayerToSpawn;
     public CharacterStatsMain characterStatsMain;
 	
 	public Transform PlayerSpawnPoint;
 
-    public int maxHP { get; set; }
-    public int curHP { get; set; }
-    public int maxMP { get; set; }
-    public int curMP { get; set; }
-    public int curAttack { get; set; }
-    public int curSpAttack { get; set; }
-    public int curDefense { get; set; }
-    public int curSpeed { get; set; }
+    //public int maxHP { get; set; }
+    //public int curHP { get; set; }
+    //public int maxMP { get; set; }
+    //public int curMP { get; set; }
+    //public int curAttack { get; set; }
+    //public int curSpAttack { get; set; }
+    //public int curDefense { get; set; }
+    //public int curSpeed { get; set; }
 
-    public int character01Life { get; set; }
-    public int character01Mana { get; set; }
-    public int character01Attack { get; set; }
+    //public int character01Life { get; set; }
+    //public int character01Mana { get; set; }
+    //public int character01Attack { get; set; }
     //TODO: Put all unlocks here.
     //Character Unlocks:
     public bool[] chars_Unlocked = new bool[21];
@@ -36,16 +36,16 @@ public class GameMaster : MonoBehaviour {
     public bool[] hasUIUnlockAnimationPlayed = new bool[70];
         
     //Armor and Weapon Unlocks:
-    public bool[] char01statUnlocks = new bool[32];
-    public bool[] char02statUnlocks = new bool[32];
-    public bool[] char03statUnlocks = new bool[32];
-    public bool[] char04statUnlocks = new bool[32];
-    public bool[] char05statUnlocks = new bool[32];
-    public bool[] char06statUnlocks = new bool[32];
-    public bool[] char07statUnlocks = new bool[32];
-    public bool[] char08statUnlocks = new bool[32];
-    public bool[] char09statUnlocks = new bool[32];
-    public bool[] char10statUnlocks = new bool[32];
+    //public bool[] char01statUnlocks = new bool[32];
+    //public bool[] char02statUnlocks = new bool[32];
+    //public bool[] char03statUnlocks = new bool[32];
+    //public bool[] char04statUnlocks = new bool[32];
+    //public bool[] char05statUnlocks = new bool[32];
+    //public bool[] char06statUnlocks = new bool[32];
+    //public bool[] char07statUnlocks = new bool[32];
+    //public bool[] char08statUnlocks = new bool[32];
+    //public bool[] char09statUnlocks = new bool[32];
+    //public bool[] char10statUnlocks = new bool[32];
     //00=  HP02Unlock, 01= MP02Unlock, 02= Att02Unlock, 03= SpAtt02Unlock, 04= Def02Unlock, 05= Spd02Unlock,
     //06=  HP03Unlock, 07= MP03Unlock, 08= Att03Unlock, 09= SpAtt03Unlock, 10= Def03Unlock, 11= Spd03Unlock,
     //12=  HP04Unlock, 13= MP04Unlock, 14= Att04Unlock, 15= SpAtt04Unlock, 16= Def04Unlock, 17= Spd04Unlock,
@@ -274,7 +274,8 @@ public class GameMaster : MonoBehaviour {
 
 	void Start()
 	{
-        
+        PlayerPrefs.SetInt("CharacterSelected", 0);
+
         //GameMaster.gameMaster.handGun = true;
 
         //Instantiate (PlayerToSpawn, PlayerSpawnPoint.position, PlayerSpawnPoint.rotation);
@@ -284,7 +285,7 @@ public class GameMaster : MonoBehaviour {
         //"Defense:", char3Def, "Endurance:", char3End, "Agility:", char3Agi);
         //Cursor.visible = false;
 
-        char01statUnlocks[24] = true;
+        //char01statUnlocks[24] = true;
 
        // Debug.Log(char01ArmorExp[0]);
        // Debug.Log(char01ArmorExp[25]);
@@ -389,34 +390,34 @@ public class GameMaster : MonoBehaviour {
 
     public void Save()
 	{
-		BinaryFormatter bf = new BinaryFormatter ();
-		FileStream file = File.Create(Application.persistentDataPath + "/playerInfo.dat");
+		//BinaryFormatter bf = new BinaryFormatter ();
+		//FileStream file = File.Create(Application.persistentDataPath + "/playerInfo.dat");
        
-		UpdatedPlayerData data = new UpdatedPlayerData ();
-		data.Base01Life = character01Life;
-        data.chars_Unlocked = chars_Unlocked;
-        data.allArmorExp = allArmorExp;
+		//UpdatedPlayerData data = new UpdatedPlayerData ();
+		////data.Base01Life = character01Life;
+  //      data.chars_Unlocked = chars_Unlocked;
+  //      data.allArmorExp = allArmorExp;
                 
-		bf.Serialize (file, data);
-		file.Close ();
-		Debug.Log ("Saving to: " + Application.persistentDataPath + "/playerInfo.dat");
+		//bf.Serialize (file, data);
+		//file.Close ();
+		//Debug.Log ("Saving to: " + Application.persistentDataPath + "/playerInfo.dat");
 	}
 	
 	public void Load()
 	{
 		if (File.Exists (Application.persistentDataPath + "/playerInfo.dat")) 
 		{
-			BinaryFormatter bf = new BinaryFormatter();
-			FileStream file = File.Open(Application.persistentDataPath + "/playerInfo.dat", FileMode.Open);
-			UpdatedPlayerData data = (UpdatedPlayerData)bf.Deserialize(file);
+			//BinaryFormatter bf = new BinaryFormatter();
+			//FileStream file = File.Open(Application.persistentDataPath + "/playerInfo.dat", FileMode.Open);
+			//UpdatedPlayerData data = (UpdatedPlayerData)bf.Deserialize(file);
 
-            file.Close();
+   //         file.Close();
 
-            character01Life = data.Base01Life;
-            chars_Unlocked = data.chars_Unlocked;
-            allArmorExp = data.allArmorExp;
+   //         character01Life = data.Base01Life;
+   //         chars_Unlocked = data.chars_Unlocked;
+   //         allArmorExp = data.allArmorExp;
             
-            Debug.Log ("Stats loaded!");
+   //         Debug.Log ("Stats loaded!");
 			
 		}
 	}
@@ -426,6 +427,7 @@ public class GameMaster : MonoBehaviour {
 class UpdatedPlayerData
 {
  
+    //Use this to keep track of what weapons and armor have been unlocked for each character.
 
 
     public int base02Life = 500, base02Mana = 100, base02Att = 100,  base02SpAtt = 100, base02Def = 100, base02Speed = 100;

@@ -6,7 +6,7 @@ using System;
 
 public class ArmorManager : MonoBehaviour {
 
-    //public static Inventory inventory;
+    //public static ArmorManager armorManager;
     //ArrayList activeItemsList = new ArrayList {};
     //public int nameCount = 0;
     //int maxItems = 0;
@@ -95,7 +95,7 @@ public class ArmorManager : MonoBehaviour {
 
 
 
-        SetActiveArmor(5);
+        GetActiveArmor(5);
         
         
        
@@ -140,7 +140,7 @@ public class ArmorManager : MonoBehaviour {
         }
     }
 
-    public Armor SetActiveArmor(int id)
+    public Armor GetActiveArmor(int id)
     {
         
         //database = this.GetComponent<ArmorDatabase>();
@@ -148,6 +148,12 @@ public class ArmorManager : MonoBehaviour {
 
         //Debug.Log("Sending the following armor- ID:" + id + " Life value is: " + numberToSendOff.Life + "Title: " + numberToSendOff.Title);
         return numberToSendOff;
+    }
+
+    public int GetArmorHP(int id)
+    {
+        int hpValue = database.FetchArmorByID(id).Life;
+        return hpValue;
     }
 
     

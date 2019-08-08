@@ -54,12 +54,14 @@ public class CharacterArmorSetterRuntime : MonoBehaviour {
     private string character02SpriteSheet = "Armor/WeaponTest";
     private string character03SpriteSheet = "Armor/WeaponTest";
     private string character04SpriteSheet = "Armor/WeaponTest";
-    private string character05SpriteSheet = "Armor/WeaponTest";
+    private string characterSpriteSheet; 
 
     SpriteRenderer spriteRenderer;
     Sprite[] sprites;
     // Use this for initialization
     void Start () {
+        characterSpriteSheet = "Armor/" + PlayerPrefs.GetInt("CurrentCharacter") + "/WeaponTest";
+
         spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
 
         SpriteSheetLoader();
@@ -77,26 +79,28 @@ public class CharacterArmorSetterRuntime : MonoBehaviour {
     //3. Set sprites to load new spritesheet variable.
     void SpriteSheetLoader()
     {
-        if (GameMaster.gameMaster.characterChosen == GameMaster.CharacterChosen.Character1)
-        {
-            sprites = Resources.LoadAll<Sprite>(character01SpriteSheet);
-        }
-        if (GameMaster.gameMaster.characterChosen == GameMaster.CharacterChosen.Character2)
-        {
-            sprites = Resources.LoadAll<Sprite>(character02SpriteSheet);
-        }
-        if (GameMaster.gameMaster.characterChosen == GameMaster.CharacterChosen.Character3)
-        {
-            sprites = Resources.LoadAll<Sprite>(character01SpriteSheet);
-        }
-        if (GameMaster.gameMaster.characterChosen == GameMaster.CharacterChosen.Character4)
-        {
-            sprites = Resources.LoadAll<Sprite>(character02SpriteSheet);
-        }
-        if (GameMaster.gameMaster.characterChosen == GameMaster.CharacterChosen.Character5)
-        {
-            sprites = Resources.LoadAll<Sprite>(character02SpriteSheet);
-        }
+        //if (GameMaster.gameMaster.characterChosen == GameMaster.CharacterChosen.Character1)
+        //{
+        //    sprites = Resources.LoadAll<Sprite>(character01SpriteSheet);
+        //}
+        //if (GameMaster.gameMaster.characterChosen == GameMaster.CharacterChosen.Character2)
+        //{
+        //    sprites = Resources.LoadAll<Sprite>(character02SpriteSheet);
+        //}
+        //if (GameMaster.gameMaster.characterChosen == GameMaster.CharacterChosen.Character3)
+        //{
+        //    sprites = Resources.LoadAll<Sprite>(character01SpriteSheet);
+        //}
+        //if (GameMaster.gameMaster.characterChosen == GameMaster.CharacterChosen.Character4)
+        //{
+        //    sprites = Resources.LoadAll<Sprite>(character02SpriteSheet);
+        //}
+        //if (GameMaster.gameMaster.characterChosen == GameMaster.CharacterChosen.Character5)
+        //{
+        //    sprites = Resources.LoadAll<Sprite>(character02SpriteSheet);
+        //}
+
+        sprites = Resources.LoadAll<Sprite>(characterSpriteSheet);
 
     }
 
@@ -128,6 +132,8 @@ public class CharacterArmorSetterRuntime : MonoBehaviour {
                 }
             }
         }
+
+
 
         if (GameMaster.gameMaster.characterChosen == GameMaster.CharacterChosen.Character2)
         {

@@ -42,7 +42,8 @@ public class ArmorDatabase : MonoBehaviour {
                 (int)armorData[i]["speed"], 
                 (int)armorData[i]["expToCap"],
                 armorData[i]["characterOwner"].ToString(), 
-                armorData[i]["slug"].ToString()));
+                armorData[i]["slug"].ToString(),
+                (int)armorData[i]["slotID"]));
 		}
 	}
 }
@@ -61,11 +62,12 @@ public class Armor
     public int ExpToCap { get; set; }
     public string CharacterOwner { get; set; }
     public string Slug { get; set; }
+    public int SlotID { get; set; }
 	public Sprite Sprite{get; set;}
     
 
 
-	public Armor(int id, string type, string title, int life, int mana, int attack, int magicAttack, int defense, int speed, int expToCap, string characterOwner, string slug)
+	public Armor(int id, string type, string title, int life, int mana, int attack, int magicAttack, int defense, int speed, int expToCap, string characterOwner, string slug, int slotID)
 	{
 		this.ID = id;
         this.Type = type;
@@ -79,6 +81,7 @@ public class Armor
         this.ExpToCap = expToCap;
         this.CharacterOwner = characterOwner;
         this.Slug = slug;
+        this.SlotID = slotID;
         this.Sprite = Resources.Load<Sprite>("Items/" + slug);
         
 	}

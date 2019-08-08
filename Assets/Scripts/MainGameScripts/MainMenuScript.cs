@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class MainMenuScript : MonoBehaviour {
 
@@ -18,15 +19,15 @@ public class MainMenuScript : MonoBehaviour {
 
 	public void NewGame()
 	{
-		GameMaster.gameMaster.roomClears = 0;
-		GameMaster.gameMaster.roomCount = 0;
-		Application.LoadLevel("CharacterSelect");
+		//GameMaster.gameMaster.roomClears = 0;
+		//GameMaster.gameMaster.roomCount = 0;
+		SceneManager.LoadScene("ArmorSelect");
 	}
 
-	public void SetMusicVolume(float vol)
-	{
-		music.volume = vol; //Use a slider to call this function. 
-	}
+	//public void SetMusicVolume(float vol)
+	//{
+	//	music.volume = vol; //Use a slider to call this function. 
+	//}
 
 	public void CharacterMenu()
 	{

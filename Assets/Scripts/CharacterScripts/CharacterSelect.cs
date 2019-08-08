@@ -1,35 +1,41 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI;
 
 public class CharacterSelect : MonoBehaviour {
 
 	private List<GameObject> models;
 	private int selectionIndex = 0;
+    public Button weaponButton;
 
 
 	// Use this for initialization
 	void Start () {
-		
-		models = new List<GameObject> ();
-		foreach (Transform t in transform) 
-		{
-			models.Add (t.gameObject);
-			t.gameObject.SetActive (false);
-		}
 
-		models [selectionIndex].SetActive (true);
+        if (PlayerPrefs.GetInt("CurrentCharacter") == null)
+        {
+
+        }
+		//models = new List<GameObject> ();
+		//foreach (Transform t in transform) 
+		//{
+		//	models.Add (t.gameObject);
+		//	t.gameObject.SetActive (false);
+		//}
+
+		//models [selectionIndex].SetActive (true);
 	}
 
 	void Update()
 	{
-		if(Input.GetButton("Cancel"))
-			Application.LoadLevel("MainMenu");
+		//if(Input.GetButton("Cancel"))
+		//	Application.LoadLevel("MainMenu");
 		
 	}
 
 
-	public void Select(int index){
+	public void Selector(int index){
 
 		if (index == selectionIndex)
 			return;
@@ -41,28 +47,23 @@ public class CharacterSelect : MonoBehaviour {
 		models [selectionIndex].SetActive (true);
 	}
 
-	public void SelectCharacter1()
+	public void SelectCharacter(int id)
 	{
-		GameMaster.gameMaster.characterChosen = GameMaster.CharacterChosen.Character1;
-		Application.LoadLevel ("Character01ArmorSelect");
-		//Debug.Log ("Step 1");
-	}
+        PlayerPrefs.SetInt("CurrentCharacter", id);
+        //Application.LoadLevel ("ArmorSelect");
 
-	public void SelectCharacter2()
-	{
-		GameMaster.gameMaster.characterChosen = GameMaster.CharacterChosen.Character2;
-		Application.LoadLevel ("Character02ArmorSelect");
-	}
+        PlayerPrefs.SetInt("ActiveWeapon", PlayerPrefs.GetInt(id + "Weapon"));
+        ChangeFocusToWeapon();
 
-	public void SelectCharacter3()
-	{
-		GameMaster.gameMaster.characterChosen = GameMaster.CharacterChosen.Character1;
-		Application.LoadLevel("Scene001");
-	}
-	public void SelectCharacter4()
-	{
-		GameMaster.gameMaster.characterChosen = GameMaster.CharacterChosen.Character4;
-		Application.LoadLevel("TestScene001");
-	}
+        Debug.Log("Character set: " + id + ". The new active weapon: " + PlayerPrefs.GetInt("ActiveWeapon"));
+        PlayerPrefs.Save();
+    }
+
+    public void ChangeFocusToWeapon()
+    {
+        //Finds and assigns the selectable to the Right of the main button.
+        Selectable newSelectable = weaponButton;
+        newSelectable.Select();
+    }
 
 }

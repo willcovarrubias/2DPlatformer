@@ -128,11 +128,11 @@ public class CharacterStatsMain : MonoBehaviour
         updatedPlayerData = new UpdatedPlayerData();
         if (GameMaster.gameMaster.characterChosen == GameMaster.CharacterChosen.Character1)
         {
-            GameMaster.gameMaster.maxHP = lifeFromCombinedArmor + GameMaster.gameMaster.character01Life;
-            GameMaster.gameMaster.curHP = lifeFromCombinedArmor + GameMaster.gameMaster.character01Life;
-            GameMaster.gameMaster.maxMP = manaFromCombinedArmor + GameMaster.gameMaster.character01Mana;
-            GameMaster.gameMaster.curMP = manaFromCombinedArmor + GameMaster.gameMaster.character01Mana;
-            GameMaster.gameMaster.curAttack = attackFromCombinedArmor + GameMaster.gameMaster.character01Attack;
+            //GameMaster.gameMaster.maxHP = lifeFromCombinedArmor + GameMaster.gameMaster.character01Life;
+            //GameMaster.gameMaster.curHP = lifeFromCombinedArmor + GameMaster.gameMaster.character01Life;
+            //GameMaster.gameMaster.maxMP = manaFromCombinedArmor + GameMaster.gameMaster.character01Mana;
+            //GameMaster.gameMaster.curMP = manaFromCombinedArmor + GameMaster.gameMaster.character01Mana;
+            //GameMaster.gameMaster.curAttack = attackFromCombinedArmor + GameMaster.gameMaster.character01Attack;
             /*GameMaster.gameMaster.curSpAttack = specialAttackFromCombinedArmor + updatedPlayerData.base01SpAtt;
             GameMaster.gameMaster.curDefense = defenseFromCombinedArmor + updatedPlayerData.base01Def;
             GameMaster.gameMaster.curSpeed = speedFromCombinedArmor + updatedPlayerData.base01Speed;
@@ -143,8 +143,8 @@ public class CharacterStatsMain : MonoBehaviour
 
         if (GameMaster.gameMaster.characterChosen == GameMaster.CharacterChosen.Character2)
         {
-            GameMaster.gameMaster.maxHP = lifeFromCombinedArmor + updatedPlayerData.base02Life;
-            GameMaster.gameMaster.curHP = lifeFromCombinedArmor + updatedPlayerData.base02Life;
+            //GameMaster.gameMaster.maxHP = lifeFromCombinedArmor + updatedPlayerData.base02Life;
+            //GameMaster.gameMaster.curHP = lifeFromCombinedArmor + updatedPlayerData.base02Life;
             /*GameMaster.gameMaster.maxMP = manaFromCombinedArmor + updatedPlayerData.base02Mana;
             GameMaster.gameMaster.curMP = manaFromCombinedArmor + updatedPlayerData.base02Mana;
             GameMaster.gameMaster.curAttack = attackFromCombinedArmor + updatedPlayerData.base02Att;
@@ -162,7 +162,7 @@ public class CharacterStatsMain : MonoBehaviour
         Debug.Log("This this run first time?");
         for (int i = characterOffset; i < (characterOffset + 35); i++)
         {
-            if (GameMaster.gameMaster.allArmorExp[i] >= armorManager.SetActiveArmor(i).ExpToCap)
+            if (GameMaster.gameMaster.allArmorExp[i] >= armorManager.GetActiveArmor(i).ExpToCap)
             {
                 GameMaster.gameMaster.armorUnlocks[i+1] = true;
                 
@@ -194,13 +194,13 @@ public class CharacterStatsMain : MonoBehaviour
 
     private void WeaponStatModifier(int id, int characterID)
     {
-        lifeFromWeapon = armorManager.SetActiveArmor(id + characterID).Life;
+        lifeFromWeapon = armorManager.GetActiveArmor(id + characterID).Life;
         //Debug.Log("Weapon ID whose stats are being sent: " + (id + characterID) + ". And the value is: " + armorManager.SetActiveArmor(id + characterID).Life);
-        manaFromWeapon = armorManager.SetActiveArmor(id + characterID).Mana;
-        attackFromWeapon = armorManager.SetActiveArmor(id + characterID).Attack;
-        specialAttackFromWeapon = armorManager.SetActiveArmor(id + characterID).MagicAttack;
-        defenseFromWeapon = armorManager.SetActiveArmor(id + characterID).Defense;
-        speedFromWeapon = armorManager.SetActiveArmor(id + characterID).Speed;
+        manaFromWeapon = armorManager.GetActiveArmor(id + characterID).Mana;
+        attackFromWeapon = armorManager.GetActiveArmor(id + characterID).Attack;
+        specialAttackFromWeapon = armorManager.GetActiveArmor(id + characterID).MagicAttack;
+        defenseFromWeapon = armorManager.GetActiveArmor(id + characterID).Defense;
+        speedFromWeapon = armorManager.GetActiveArmor(id + characterID).Speed;
 
         //    CalculateStatsFromArmor();
         //AssignCurrentCharacterStats();
@@ -222,13 +222,13 @@ public class CharacterStatsMain : MonoBehaviour
 
     private void RangedStatModifier(int id, int characterID)
     {
-        lifeFromRanged = armorManager.SetActiveArmor(id + characterID + 5).Life;
+        lifeFromRanged = armorManager.GetActiveArmor(id + characterID + 5).Life;
         //Debug.Log("Ranged ID whose stats are being sent: " + (id + characterID + 5) + ". And the value is: " + armorManager.SetActiveArmor(id + characterID + 5).Life);
-        manaFromRanged = armorManager.SetActiveArmor(id + characterID + 5).Mana;
-        attackFromRanged = armorManager.SetActiveArmor(id + characterID + 5).Attack;
-        specialAttackFromRanged = armorManager.SetActiveArmor(id + characterID + 5).MagicAttack;
-        defenseFromRanged = armorManager.SetActiveArmor(id + characterID + 5).Defense;
-        speedFromRanged = armorManager.SetActiveArmor(id + characterID + 5).Speed;
+        manaFromRanged = armorManager.GetActiveArmor(id + characterID + 5).Mana;
+        attackFromRanged = armorManager.GetActiveArmor(id + characterID + 5).Attack;
+        specialAttackFromRanged = armorManager.GetActiveArmor(id + characterID + 5).MagicAttack;
+        defenseFromRanged = armorManager.GetActiveArmor(id + characterID + 5).Defense;
+        speedFromRanged = armorManager.GetActiveArmor(id + characterID + 5).Speed;
 
         //  CalculateStatsFromArmor();
         //AssignCurrentCharacterStats();
@@ -249,13 +249,13 @@ public class CharacterStatsMain : MonoBehaviour
 
     private void HeadArmorStatModifier(int id, int characterID)
     {
-        lifeFromHelm = armorManager.SetActiveArmor(id + characterID + 10).Life;
+        lifeFromHelm = armorManager.GetActiveArmor(id + characterID + 10).Life;
         //Debug.Log("Head ID whose stats are being sent: " + (id + characterID + 10) + ". And the value is: " + armorManager.SetActiveArmor(id + characterID + 10).Life);
-        manaFromHelm = armorManager.SetActiveArmor(id + characterID + 10).Mana;
-        attackFromHelm = armorManager.SetActiveArmor(id + characterID + 10).Attack;
-        specialAttackFromHelm = armorManager.SetActiveArmor(id + characterID + 10).MagicAttack;
-        defenseFromHelm = armorManager.SetActiveArmor(id + characterID + 10).Defense;
-        speedFromHelm = armorManager.SetActiveArmor(id + characterID + 10).Speed;
+        manaFromHelm = armorManager.GetActiveArmor(id + characterID + 10).Mana;
+        attackFromHelm = armorManager.GetActiveArmor(id + characterID + 10).Attack;
+        specialAttackFromHelm = armorManager.GetActiveArmor(id + characterID + 10).MagicAttack;
+        defenseFromHelm = armorManager.GetActiveArmor(id + characterID + 10).Defense;
+        speedFromHelm = armorManager.GetActiveArmor(id + characterID + 10).Speed;
 
         //   CalculateStatsFromArmor();
         //AssignCurrentCharacterStats();
@@ -277,12 +277,12 @@ public class CharacterStatsMain : MonoBehaviour
 
     private void BodyArmorStatModifier(int id, int characterID)
     {
-        lifeFromBody = armorManager.SetActiveArmor(id + characterID + 15).Life;
-        manaFromBody = armorManager.SetActiveArmor(id + characterID + 15).Mana;
-        attackFromBody = armorManager.SetActiveArmor(id + characterID + 15).Attack;
-        specialAttackFromBody = armorManager.SetActiveArmor(id + characterID + 15).MagicAttack;
-        defenseFromBody = armorManager.SetActiveArmor(id + characterID + 15).Defense;
-        speedFromBody = armorManager.SetActiveArmor(id + characterID + 15).Speed;
+        lifeFromBody = armorManager.GetActiveArmor(id + characterID + 15).Life;
+        manaFromBody = armorManager.GetActiveArmor(id + characterID + 15).Mana;
+        attackFromBody = armorManager.GetActiveArmor(id + characterID + 15).Attack;
+        specialAttackFromBody = armorManager.GetActiveArmor(id + characterID + 15).MagicAttack;
+        defenseFromBody = armorManager.GetActiveArmor(id + characterID + 15).Defense;
+        speedFromBody = armorManager.GetActiveArmor(id + characterID + 15).Speed;
 
         //  CalculateStatsFromArmor();
         //AssignCurrentCharacterStats();
@@ -304,12 +304,12 @@ public class CharacterStatsMain : MonoBehaviour
 
     private void HandArmorStatModifier(int id, int characterID)
     {
-        lifeFromHands = armorManager.SetActiveArmor(id + characterID + 20).Life;
-        manaFromHands = armorManager.SetActiveArmor(id + characterID + 20).Mana;
-        attackFromHands = armorManager.SetActiveArmor(id + characterID + 20).Attack;
-        specialAttackFromHands = armorManager.SetActiveArmor(id + characterID + 20).MagicAttack;
-        defenseFromHands = armorManager.SetActiveArmor(id + characterID + 20).Defense;
-        speedFromHands = armorManager.SetActiveArmor(id + characterID + 20).Speed;
+        lifeFromHands = armorManager.GetActiveArmor(id + characterID + 20).Life;
+        manaFromHands = armorManager.GetActiveArmor(id + characterID + 20).Mana;
+        attackFromHands = armorManager.GetActiveArmor(id + characterID + 20).Attack;
+        specialAttackFromHands = armorManager.GetActiveArmor(id + characterID + 20).MagicAttack;
+        defenseFromHands = armorManager.GetActiveArmor(id + characterID + 20).Defense;
+        speedFromHands = armorManager.GetActiveArmor(id + characterID + 20).Speed;
 
         //  CalculateStatsFromArmor();
         //AssignCurrentCharacterStats();
@@ -331,12 +331,12 @@ public class CharacterStatsMain : MonoBehaviour
 
     private void LegArmorStatModifier(int id, int characterID)
     {
-        lifeFromLegs = armorManager.SetActiveArmor((id + characterID + 25)).Life;
-        manaFromLegs = armorManager.SetActiveArmor(id + characterID + 25).Mana;
-        attackFromLegs = armorManager.SetActiveArmor(id + characterID + 25).Attack;
-        specialAttackFromLegs = armorManager.SetActiveArmor(id + characterID + 25).MagicAttack;
-        defenseFromLegs = armorManager.SetActiveArmor(id + characterID + 25).Defense;
-        speedFromLegs = armorManager.SetActiveArmor(id + characterID + 25).Speed;
+        lifeFromLegs = armorManager.GetActiveArmor((id + characterID + 25)).Life;
+        manaFromLegs = armorManager.GetActiveArmor(id + characterID + 25).Mana;
+        attackFromLegs = armorManager.GetActiveArmor(id + characterID + 25).Attack;
+        specialAttackFromLegs = armorManager.GetActiveArmor(id + characterID + 25).MagicAttack;
+        defenseFromLegs = armorManager.GetActiveArmor(id + characterID + 25).Defense;
+        speedFromLegs = armorManager.GetActiveArmor(id + characterID + 25).Speed;
 
         // CalculateStatsFromArmor();
         //AssignCurrentCharacterStats();
@@ -358,12 +358,12 @@ public class CharacterStatsMain : MonoBehaviour
 
     private void AccessoryArmorStatModifier(int id, int characterID)
     {
-        lifeFromAccessory = armorManager.SetActiveArmor(id + characterID + 30).Life;
-        manaFromAccessory = armorManager.SetActiveArmor(id + characterID + 30).Mana;
-        attackFromAccessory = armorManager.SetActiveArmor(id + characterID + 30).Attack;
-        specialAttackFromAccessory = armorManager.SetActiveArmor(id + characterID + 30).MagicAttack;
-        defenseFromAccessory = armorManager.SetActiveArmor(id + characterID + 30).Defense;
-        speedFromAccessory = armorManager.SetActiveArmor(id + characterID + 30).Speed;
+        lifeFromAccessory = armorManager.GetActiveArmor(id + characterID + 30).Life;
+        manaFromAccessory = armorManager.GetActiveArmor(id + characterID + 30).Mana;
+        attackFromAccessory = armorManager.GetActiveArmor(id + characterID + 30).Attack;
+        specialAttackFromAccessory = armorManager.GetActiveArmor(id + characterID + 30).MagicAttack;
+        defenseFromAccessory = armorManager.GetActiveArmor(id + characterID + 30).Defense;
+        speedFromAccessory = armorManager.GetActiveArmor(id + characterID + 30).Speed;
 
         //CalculateStatsFromArmor();
         //AssignCurrentCharacterStats();
