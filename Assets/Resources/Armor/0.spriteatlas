@@ -21,7 +21,7 @@ SpriteAtlas:
       crunchedCompression: 0
       sRGB: 1
     platformSettings:
-    - serializedVersion: 2
+    - serializedVersion: 3
       m_BuildTarget: DefaultTexturePlatform
       m_MaxTextureSize: 1024
       m_ResizeAlgorithm: 0
@@ -32,6 +32,7 @@ SpriteAtlas:
       m_AllowsAlphaSplitting: 0
       m_Overridden: 0
       m_AndroidETC2FallbackOverride: 0
+      m_ForceMaximumCompressionQuality_BC6H_BC7: 1
     packingSettings:
       serializedVersion: 2
       padding: 4
@@ -42,21 +43,12 @@ SpriteAtlas:
     variantMultiplier: 1
     packables:
     - {fileID: 21300000, guid: 3cdf53db03c546149ba1effdbc8340bf, type: 3}
-    - {fileID: 21300000, guid: 542d6390c7491524da7d2365e268fe82, type: 3}
-    - {fileID: 21300000, guid: c9e1c41db7418b54e919d8a3ef3725b0, type: 3}
-    - {fileID: 21300002, guid: c9e1c41db7418b54e919d8a3ef3725b0, type: 3}
-    totalSpriteSurfaceArea: 889913
+    totalSpriteSurfaceArea: 1280
     bindAsDefault: 1
   m_MasterAtlas: {fileID: 0}
   m_PackedSprites:
-  - {fileID: 21300000, guid: 542d6390c7491524da7d2365e268fe82, type: 3}
   - {fileID: 21300000, guid: 3cdf53db03c546149ba1effdbc8340bf, type: 3}
-  - {fileID: 21300000, guid: c9e1c41db7418b54e919d8a3ef3725b0, type: 3}
-  - {fileID: 21300002, guid: c9e1c41db7418b54e919d8a3ef3725b0, type: 3}
   m_PackedSpriteNamesToIndex:
-  - 0
   - Bow
-  - Head
-  - Torso
   m_Tag: 0
   m_IsVariant: 0

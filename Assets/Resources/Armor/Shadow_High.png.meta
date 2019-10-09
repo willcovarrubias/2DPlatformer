@@ -1,24 +1,93 @@
 fileFormatVersion: 2
 guid: c9e1c41db7418b54e919d8a3ef3725b0
 TextureImporter:
-  fileIDToRecycleName:
-    21300000: Head
-    21300002: Torso
-    21300004: UpperArm_L
-    21300006: Core
-    21300008: Forearm_L
-    21300010: Thigh_L
-    21300012: Thigh_R
-    21300014: UpperArm_R
-    21300016: Hand_L
-    21300018: Shin_L
-    21300020: Shin_R
-    21300022: Forearm_R
-    21300024: Foot_L
-    21300026: Foot_R
-    21300028: Hand_R
+  internalIDToNameTable:
+  - first:
+      213: 21300000
+    second: Head
+  - first:
+      213: 21300002
+    second: Torso
+  - first:
+      213: 21300004
+    second: UpperArm_L
+  - first:
+      213: 21300006
+    second: Core
+  - first:
+      213: 21300008
+    second: Forearm_L
+  - first:
+      213: 21300010
+    second: Thigh_L
+  - first:
+      213: 21300012
+    second: Thigh_R
+  - first:
+      213: 21300014
+    second: UpperArm_R
+  - first:
+      213: 21300016
+    second: Hand_L
+  - first:
+      213: 21300018
+    second: Shin_L
+  - first:
+      213: 21300020
+    second: Shin_R
+  - first:
+      213: 21300022
+    second: Forearm_R
+  - first:
+      213: 21300024
+    second: Foot_L
+  - first:
+      213: 21300026
+    second: Foot_R
+  - first:
+      213: 21300028
+    second: Hand_R
+  - first:
+      213: 6223274807959569213
+    second: Shadow_High_0
+  - first:
+      213: 4066467069976960396
+    second: Shadow_High_1
+  - first:
+      213: -5771222081909347984
+    second: Shadow_High_2
+  - first:
+      213: -8888798739971921520
+    second: Shadow_High_3
+  - first:
+      213: -1727478123502109646
+    second: Shadow_High_4
+  - first:
+      213: 7246190057600534476
+    second: Shadow_High_5
+  - first:
+      213: -927121161537702581
+    second: Shadow_High_6
+  - first:
+      213: -8329154528523637340
+    second: Shadow_High_7
+  - first:
+      213: 8911270438847062464
+    second: Shadow_High_8
+  - first:
+      213: 6105553250166732429
+    second: Shadow_High_9
+  - first:
+      213: 7928870290353443750
+    second: Shadow_High_10
+  - first:
+      213: -4657342159460479794
+    second: Shadow_High_11
+  - first:
+      213: 2893361847742927358
+    second: Shadow_High_12
   externalObjects: {}
-  serializedVersion: 9
+  serializedVersion: 10
   mipmaps:
     mipMapMode: 0
     enableMipMap: 1
@@ -60,7 +129,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 60
+  spritePixelsToUnits: 128
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -73,7 +142,7 @@ TextureImporter:
   compressionQualitySet: 0
   textureFormatSet: 0
   platformSettings:
-  - serializedVersion: 2
+  - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
     maxTextureSize: 2048
     resizeAlgorithm: 0
@@ -84,7 +153,8 @@ TextureImporter:
     allowsAlphaSplitting: 0
     overridden: 0
     androidETC2FallbackOverride: 0
-  - serializedVersion: 2
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
     buildTarget: Standalone
     maxTextureSize: 2048
     resizeAlgorithm: 0
@@ -95,7 +165,8 @@ TextureImporter:
     allowsAlphaSplitting: 0
     overridden: 0
     androidETC2FallbackOverride: 0
-  - serializedVersion: 2
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
     buildTarget: Android
     maxTextureSize: 2048
     resizeAlgorithm: 0
@@ -106,245 +177,291 @@ TextureImporter:
     allowsAlphaSplitting: 0
     overridden: 0
     androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Windows Store Apps
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Head
+      name: Shadow_High_0
       rect:
         serializedVersion: 2
-        x: 114
-        y: 1991
-        width: 1122
-        height: 1306
+        x: 3
+        y: 152
+        width: 89
+        height: 96
       alignment: 9
-      pivot: {x: 0.33173198, y: 0.06091776}
+      pivot: {x: 0.42170125, y: 0.046866894}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 988053474f2a8ec4698809a176a471f3
+      spriteID: 58d8ecad9646aad469086cd52d3accd1
+      internalID: 6223274807959569213
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Torso
+      name: Shadow_High_1
       rect:
         serializedVersion: 2
-        x: 1262
-        y: 2178
-        width: 802
-        height: 1135
+        x: 97
+        y: 172
+        width: 57
+        height: 82
       alignment: 9
-      pivot: {x: 0.5179708, y: 0.054456208}
+      pivot: {x: 0.35922068, y: 0.0802376}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 99f1b4f2aca251745a13fb6c59aa4030
+      spriteID: 50d50ba69857ade48965c66972e09371
+      internalID: 4066467069976960396
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: UpperArm_L
+      name: Shadow_High_2
       rect:
         serializedVersion: 2
-        x: 61
-        y: 1481
-        width: 532
-        height: 477
+        x: 3
+        y: 113
+        width: 46
+        height: 37
       alignment: 9
-      pivot: {x: 0.79368544, y: 0.8634788}
+      pivot: {x: 0.7692401, y: 0.8424361}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: f796e80811f333c458ef185bd3e1f35f
+      spriteID: 2ff3057d8573f094080d108d6d88fe0d
+      internalID: -5771222081909347984
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Core
+      name: Shadow_High_3
       rect:
         serializedVersion: 2
-        x: 1211
-        y: 1679
-        width: 887
-        height: 424
+        x: 52
+        y: 76
+        width: 30
+        height: 52
+      alignment: 9
+      pivot: {x: 0.49155334, y: 0.8614238}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f5ecdc45313cae54dbb33f6192e16dc9
+      internalID: -8888798739971921520
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shadow_High_4
+      rect:
+        serializedVersion: 2
+        x: 91
+        y: 127
+        width: 60
+        height: 34
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 99a230de9ec17214fab1435d81f479a2
+      spriteID: 47f1669d2c510884ab2f76c0c837784b
+      internalID: -1727478123502109646
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Forearm_L
+      name: Shadow_High_5
       rect:
         serializedVersion: 2
-        x: 13
-        y: 910
-        width: 278
-        height: 485
+        x: 0
+        y: 70
+        width: 25
+        height: 37
       alignment: 9
-      pivot: {x: 0.44147196, y: 0.88795936}
+      pivot: {x: 0.43242568, y: 0.8595581}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 3fa0b844ab548064bb7f9fed60dde0e9
+      spriteID: 3e7f2cd0953740146965269036178637
+      internalID: 7246190057600534476
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Thigh_L
+      name: Shadow_High_6
       rect:
         serializedVersion: 2
-        x: 695
-        y: 1009
-        width: 353
-        height: 651
+        x: 27
+        y: 81
+        width: 25
+        height: 28
       alignment: 9
-      pivot: {x: 0.4540106, y: 0.88113743}
+      pivot: {x: 0.4746599, y: 0.84692085}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 880a8b367fceaf54e95650f21aceb519
+      spriteID: 347df5d2f30ed1e45892ca7beb5b475d
+      internalID: -927121161537702581
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: UpperArm_R
+      name: Shadow_High_7
       rect:
         serializedVersion: 2
-        x: 1251
-        y: 895
-        width: 577
-        height: 504
+        x: 96
+        y: 71
+        width: 44
+        height: 36
       alignment: 9
-      pivot: {x: 0.2157578, y: 0.85272604}
+      pivot: {x: 0.2096426, y: 0.8343508}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 8db539fbe996bdf4eb098360a502df5f
+      spriteID: 59e6bd6d4e62e81438ae614a7ef955df
+      internalID: -8329154528523637340
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Hand_L
+      name: Shadow_High_8
       rect:
         serializedVersion: 2
-        x: 367
-        y: 1124
-        width: 276
-        height: 299
-      alignment: 9
-      pivot: {x: 0.49330625, y: 0.78625286}
+        x: 2
+        y: 33
+        width: 33
+        height: 35
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 757af5cb11143424585d337ff786e1b8
+      spriteID: cb2edec79f0548241b36250c7efea4bf
+      internalID: 8911270438847062464
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Shin_L
+      name: Shadow_High_9
       rect:
         serializedVersion: 2
-        x: 626
-        y: 316
-        width: 359
-        height: 574
+        x: 48
+        y: 24
+        width: 27
+        height: 44
       alignment: 9
-      pivot: {x: 0.5441723, y: 0.91481197}
+      pivot: {x: 0.51919746, y: 0.8935419}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 25f96477ea71d17488c54058fb6d4924
+      spriteID: 343055ec297dc8548b9df1c6f588561e
+      internalID: 6105553250166732429
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Foot_L
+      name: Shadow_High_10
       rect:
         serializedVersion: 2
-        x: 503
-        y: 34
-        width: 374
-        height: 245
-      alignment: 9
-      pivot: {x: 0.46942303, y: 0.9098608}
+        x: 127
+        y: 4
+        width: 33
+        height: 35
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 2056a39abcc0b1441a3dd0f39691f2b0
+      spriteID: c7de5387f3d5a9a498e8c53470b1b63c
+      internalID: 7928870290353443750
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Foot_R
+      name: Shadow_High_11
       rect:
         serializedVersion: 2
-        x: 1233
-        y: 32
-        width: 360
-        height: 185
+        x: 37
+        y: 2
+        width: 32
+        height: 15
       alignment: 9
-      pivot: {x: 0.29308912, y: 0.85790193}
+      pivot: {x: 0.31590915, y: 0.697091}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: b16145168549204479afd2944e64d515
+      spriteID: 8462d5773330b3542a0f7d31ddecc92e
+      internalID: -4657342159460479794
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Hand_R
+      name: Shadow_High_12
       rect:
         serializedVersion: 2
-        x: 1663
-        y: 61
-        width: 425
-        height: 446
+        x: 92
+        y: 2
+        width: 31
+        height: 15
       alignment: 9
-      pivot: {x: 0.32473373, y: 0.549486}
+      pivot: {x: 0.28128925, y: 0.71116894}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 722ac1a8324295244b3f6b69a40f646b
+      spriteID: 89757ef63872c764fa8aa878ffa0c20f
+      internalID: 2893361847742927358
       vertices: []
       indices: 
       edges: []
@@ -353,10 +470,12 @@ TextureImporter:
     physicsShape: []
     bones: []
     spriteID: 63542f430c77d8e47b1689460aaef9b4
+    internalID: 0
     vertices: []
     indices: 
     edges: []
     weights: []
+    secondaryTextures: []
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

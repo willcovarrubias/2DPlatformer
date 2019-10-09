@@ -2,8 +2,8 @@
 [
 	{
 		"id": 0,
-		"type": "Character1",
-		"title": "Starting character.",
+		"profession": "Warrior",
+		"title": "Memo",
 		"life": 20,
 		"mana": 20,
 		"attack": 5,
@@ -13,8 +13,19 @@
 	},
 	{
 		"id": 1,
-		"type": "Character2",
-		"title": "Second character.",
+		"profession": "White Mage",
+		"title": "Daisy",
+		"life": 18,
+		"mana": 40,
+		"attack": 5,
+		"magicAttack": 5,
+		"defense": 10,
+		"speed": 40
+	},
+	{
+		"id": 2,
+		"profession": "Bard",
+		"title": "Alan",
 		"life": 20,
 		"mana": 20,
 		"attack": 5,

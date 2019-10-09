@@ -6,30 +6,30 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/MainMenu.unity
+    path: Assets/_Project/Scenes/MainMenu.unity
     guid: f0e3c2630983ee9438a861bd3e7bd37f
   - enabled: 1
-    path: Assets/Scenes/Scene001.unity
+    path: Assets/_Project/Scenes/Scene001.unity
     guid: 9fb4fae54fe7a724090ca67d5f610882
   - enabled: 1
-    path: Assets/Scenes/CharacterSelect.unity
+    path: Assets/_Project/Scenes/CharacterSelect.unity
     guid: 41f87f767342305409eec648c4532ec5
   - enabled: 1
-    path: Assets/Scenes/ArmorSelect.unity
+    path: Assets/_Project/Scenes/ArmorSelect.unity
     guid: 25f6d04ba1ef0204aadf7530d91d6954
   - enabled: 1
-    path: Assets/Scenes/EndMenu.unity
+    path: Assets/_Project/Scenes/EndMenu.unity
     guid: fe94da49b721a5b40803b086fd4f4e31
   - enabled: 1
-    path: Assets/Scenes/Gallery.unity
+    path: Assets/_Project/Scenes/Gallery.unity
     guid: ab5e756705a7d8745b6983da31bed646
   - enabled: 1
-    path: Assets/Scenes/TestScene001.unity
+    path: Assets/_Project/Scenes/TestScene001.unity
     guid: 4a05da47997ca064f90934f43a5f91d1
   - enabled: 1
-    path: Assets/Scenes/AStarTestingScene.unity
+    path: Assets/_Project/Scenes/AStarTestingScene.unity
     guid: 0296c04be39021e49b1a35cf58263ed4
   - enabled: 1
-    path: Assets/Scenes/Level1.unity
+    path: Assets/_Project/Scenes/Level1.unity
     guid: c122a21a045f7b84e88b0f2ab03b35b8
   m_configObjects: {}
