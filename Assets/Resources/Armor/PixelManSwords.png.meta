@@ -143,12 +143,12 @@ TextureImporter:
       name: PixelManSwords_1
       rect:
         serializedVersion: 2
-        x: 95
-        y: 63
-        width: 138
-        height: 38
+        x: 69
+        y: 56
+        width: 146
+        height: 30
       alignment: 9
-      pivot: {x: 0.091434315, y: 0.39997283}
+      pivot: {x: 0.036708362, y: 0.38566944}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []

@@ -31,6 +31,12 @@ public class Player : MonoBehaviour
 
     Controller2D controller;
     PlayerAttack playerAttack;
+    AudioSource audioSource;
+    public AudioClip[] audioClips;
+    private bool canPlayLandingSound = false;
+
+    public GameObject bloodEffectsSprite, bloodEffectsSprite2, bloodEffectsSprite3;
+    public Transform bloodEffectTransformHead, bloodEffectTransformTorso, bloodEffectTransformWeapon;
 
     bool flightOn;
     bool alreadyJumped;
@@ -38,10 +44,15 @@ public class Player : MonoBehaviour
     bool landed;
     public float slideSpeed;
     public float dodgeBackSpeed;
-    private float dodgeRate = 1f;
-    private float slideRate = 1f;
+    private float dodgeRate = .6f;
+    private float slideRate = .6f;
     private float nextDodge;
-    public float dodgeDuration = 10f;
+    public float attackRangeX;
+    public float attackRangeY;
+    public Transform shoulderPos;
+    public LayerMask whatToHit;
+
+    //public float dodgeDuration = 10f;
     public bool takingDamage = false;
     public bool playerisDead = false;
     
@@ -79,6 +90,7 @@ public class Player : MonoBehaviour
     {
         controller = GetComponent<Controller2D>();
         playerAttack = GetComponent<PlayerAttack>();
+        audioSource = GetComponent<AudioSource>();
 
         gravity = -(2 * maxJumpHeight) / Mathf.Pow(timeToJumpApex, 2);
         maxJumpVelocity = Mathf.Abs(gravity) * timeToJumpApex;
@@ -93,13 +105,13 @@ public class Player : MonoBehaviour
         if (GameMaster.gameMaster.isPaused == false && !GameMaster.gameMaster.inACutscene )
         {
             Vector2 input;
-            if (!playerisDead && !takingDamage)
+            if (!playerisDead && !takingDamage && !playerAttack.playerMeleeing)
             {
                 input = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
             }
             else
             {
-                input = new Vector2(0,0);
+                input = new Vector2(0, Input.GetAxis("Vertical"));
             }
             
             int wallDirX = (controller.collisions.left) ? -1 : 1;
@@ -113,6 +125,8 @@ public class Player : MonoBehaviour
             float targetVelocityY = input.y * moveSpeed;
 
             anim.SetFloat("Velocity", Mathf.Abs(targetVelocityX));
+
+            
 
             //Check if player is on the ground.
             if (controller.collisions.below)
@@ -138,7 +152,7 @@ public class Player : MonoBehaviour
 
             //This If statement determines whether or not wall jumping happens.
             //WALL HUGGING LOGIC
-            if ((controller.collisions.left || controller.collisions.right) && !controller.collisions.below && velocity.y < 0)
+            if ((controller.collisions.left || controller.collisions.right) && !controller.collisions.below && velocity.y < 0 && !takingDamage)
             {
 
                 if (controller.collisions.left)
@@ -180,10 +194,14 @@ public class Player : MonoBehaviour
 
 
             //CROUCHING LOGIC
-            if (input.y == -1 && velocity.y >= 0 && Input.GetAxis("Horizontal") == 0 && !playerAttack.currentlySwitchingAnimator && onTheGround)
+            if (input.y == -1 && velocity.y >= 0 && Input.GetAxis("Horizontal") == 0 && onTheGround)
             {
-                anim.SetBool("Ducking", true);
-                currentlyDucking = true;
+                if (!playerAttack.playerMeleeing)
+                {
+                    anim.SetBool("Ducking", true);
+                    currentlyDucking = true;
+                }
+                    
             }
             else
             {
@@ -203,7 +221,7 @@ public class Player : MonoBehaviour
 
             
             //JUMPING logic.
-            if (Input.GetButtonDown("Jump") &&  !playerAttack.currentlySwitchingAnimator && !takingDamage && !playerisDead)
+            if (Input.GetButtonDown("Jump") &&  !playerAttack.currentlySwitchingAnimator && !takingDamage && !playerisDead && !playerAttack.playerMeleeing)
             {
                 if (wallSliding)
                 {
@@ -309,6 +327,7 @@ public class Player : MonoBehaviour
 
 
             //Moves the character.
+            
             controller.Move(velocity * Time.deltaTime, input);
 
             //Sets animator for jumping animations.
@@ -316,13 +335,16 @@ public class Player : MonoBehaviour
             {
                 velocity.y = 0;
                 anim.SetBool("Jumping", false);
-
+                LandNoise();
             }
-            
-            if (!controller.collisions.below && velocity.y < 0)
-                anim.SetBool("Jumping", true);
 
-            
+            if (!controller.collisions.below && velocity.y < 0)
+            {
+                anim.SetBool("Jumping", true);
+                canPlayLandingSound = true;
+            }
+
+
             //Test for flight.
             //TODO: Remove once a flight item is implemented and flight animations are added.
             if (Input.GetKeyDown(KeyCode.N))
@@ -336,9 +358,27 @@ public class Player : MonoBehaviour
             //Test for specials. 
             //TODO: Add other logic to specials, like restrict movement perhaps?
             if (Input.GetKeyDown(KeyCode.B))
-                anim.Play("ShortySpecial");            
+                anim.Play("ShortySpecial");
+
+            //All the sound stuff.
+            if ((velocity.x > .1f || velocity.x < -0.1f)&& onTheGround && !audioSource.isPlaying)
+            {
+                if (velocity.x >= 2.1f || velocity.x <= -2.1f)
+                {
+                    audioSource.clip = audioClips[0];
+                }
+                else
+                {
+                    audioSource.clip = audioClips[1];
+                }
+                audioSource.pitch = Random.Range(.8f, 1f);
+                audioSource.volume = Random.Range(.75f, .9f) / 2;
+                audioSource.Play();
+            }
+
             
-            
+
+
         }
     }
 
@@ -347,7 +387,7 @@ public class Player : MonoBehaviour
         Vector2 input = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
         Vector3 theScale = tf.localScale;        
 
-        if (Time.time > nextDodge && !playerisDead && !playerAttack.currentlyInRangeMode)
+        if (Time.time > nextDodge && !playerisDead && !playerAttack.currentlyInRangeMode && !playerAttack.playerMeleeing)
         {
             //Sliding logic.
             if (!facingRight && (onTheGround && velocity.y == 0) && Input.GetButtonDown("Slide") && !Input.GetButtonDown("Jump") && !playerAttack.currentlySwitchingAnimator)
@@ -371,6 +411,7 @@ public class Player : MonoBehaviour
                 {
                     velocity.x = slideSpeed;
                     anim.Play("DodgeForward");
+                    //ShoulderTackle();
                     SetCurrentlyDodging(true);
                     nextDodge = Time.time + dodgeRate;
                     Invoke("JumpDust", .1f);
@@ -385,7 +426,7 @@ public class Player : MonoBehaviour
                 }
             }
             else
-            {
+            { 
                 if (controller.collisions.below && Input.GetButtonDown("Dodge_R") && !playerAttack.currentlySwitchingAnimator && input.x == 0)
                 {
                     velocity.x = dodgeBackSpeed;
@@ -398,6 +439,7 @@ public class Player : MonoBehaviour
                 {
                     velocity.x = -slideSpeed;
                     anim.Play("DodgeForward");
+                   // ShoulderTackle();
                     SetCurrentlyDodging(true);
                     nextDodge = Time.time + dodgeRate;
                     Invoke("JumpDust", .1f);
@@ -409,7 +451,18 @@ public class Player : MonoBehaviour
         }
     }
 
-    
+    private void ShoulderTackle()
+    {
+        Collider2D[] enemiesToDamage = Physics2D.OverlapBoxAll(shoulderPos.position, new Vector2(attackRangeX, attackRangeY), 0, whatToHit);
+        for (int i = 0; i < enemiesToDamage.Length; i++)
+        {
+            enemiesToDamage[i].GetComponent<Enemy>().DamageEnemy(0, 5, true);
+
+            Debug.Log("Camera should be shaking!");
+        }
+
+    }
+
     public void FaceRight()
     {
         Vector3 theScale = tf.localScale;
@@ -450,14 +503,48 @@ public class Player : MonoBehaviour
         JumpDust();
     }
 
-    void JumpDust()
+    private void OnDrawGizmosSelected()
     {
+        Gizmos.color = Color.magenta;
+        Gizmos.DrawWireCube(shoulderPos.position, new Vector3(attackRangeX, attackRangeY, 1));
+    }
+
+        void JumpDust()
+    {
+        JumpNoise();
         Instantiate(jumpDust, jumpDustTransform.position, Quaternion.Euler(0, 0, 0));
     }
 
     void WallJumpDust()
     {
         Instantiate(wallJumpDust, wallJumpDustTransform.position, Quaternion.Euler(0, 0, 0));
+    }
+
+    private void JumpNoise()
+    {
+        audioSource.volume = .75f;
+        audioSource.PlayOneShot(audioClips[2]);
+    }
+
+    private void LandNoise()
+    {
+        //audioSource.clip = audioClips[1];
+        if (!audioSource.isPlaying && canPlayLandingSound)
+        {
+            audioSource.volume = 1;
+            audioSource.PlayOneShot(audioClips[3]);
+            canPlayLandingSound = false;
+        }
+        
+    }
+
+    public void SpawnEnemyBloodSplatter()
+    {
+        Instantiate(bloodEffectsSprite, bloodEffectTransformHead.position, Quaternion.Euler(0, 0, Random.Range(0, 45)), bloodEffectTransformHead);
+        Instantiate(bloodEffectsSprite2, bloodEffectTransformTorso.position, Quaternion.Euler(0, 0, Random.Range(0, 45)), bloodEffectTransformTorso);
+        Instantiate(bloodEffectsSprite3, bloodEffectTransformWeapon.position, bloodEffectTransformWeapon.rotation, bloodEffectTransformWeapon);
+
+
     }
 
     private void OnCollisionEnter2D(Collision2D other)
@@ -473,5 +560,7 @@ public class Player : MonoBehaviour
             WallJumpDust();
         }
     }
+
+    
 
 }

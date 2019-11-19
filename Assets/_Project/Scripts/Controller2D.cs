@@ -62,7 +62,7 @@ public class Controller2D : RaycastController
 
         if (Mathf.Abs(velocity.x) < skinWidth)
         {
-            rayLength = 5 * skinWidth;
+            rayLength = 2.5f * skinWidth;
         }
 
         for (int i = 0; i < horizontalRayCount; i++)
@@ -117,6 +117,8 @@ public class Controller2D : RaycastController
                         //collisions.right = directionX == 1;
                     }
                 }
+
+                
 
 
                 //This logic differentiates between the two types of walls. If it's a GrabWall, it'll allow for walljumping.

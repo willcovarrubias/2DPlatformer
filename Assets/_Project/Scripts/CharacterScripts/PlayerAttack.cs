@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using Cinemachine;
 
 [System.Serializable]
 public class PlayerAttack : MonoBehaviour {
@@ -19,16 +20,27 @@ public class PlayerAttack : MonoBehaviour {
     public Transform firePointForProjectiles;
     public Transform firePointForChargeUpAttacks;
     
-    public Collider2D meleeTriggerHitBoxHorizontal;
-    public Collider2D meleeTriggerHitBoxVertical;
+    //public Collider2D meleeTriggerHitBoxHorizontal;
+    //public Collider2D meleeTriggerHitBoxVertical;
 
     private Animator anim;
     private Player player;
-    
+    public GameObject audioSourceObject;
+    private AudioSource audioSource;
+    public AudioClip[] audioClips;
+
     //Regular melee timers and cooldown.
-    private float meleeTimer = 0;
-	private float meleeCD = .1f;
-     
+    public float meleeTimer = 0;
+	public float meleeCoolDown = 0;
+    public float attackRangeX;
+    public float attackRangeY;
+    public float attackRangeXUp;
+    public float attackRangeYUp;
+    public float attackRangeXCrouch;
+    public float attackRangeYCrouch;
+    public Transform attackPos, attackPosUp, attackPosCrouch;
+    public LayerMask whatToHit;
+
 	//Charge Attack Attributes
     private float chargeTime = 0;
 
@@ -42,24 +54,30 @@ public class PlayerAttack : MonoBehaviour {
     //Attributes for switching between Animator Controllers during runtime.
     public bool currentlySwitchingAnimator = false;
     public bool currentlyInRangeMode = false;
-
+    public GameObject mainWeapon;
+    public GameObject sheathedWeapon;
 
     public float animatorSwitchCoolDown = 1f;
     public float animatorSwitchTimer = 0;
 
 
 
+
     void Awake ()
     {
-		meleeTriggerHitBoxHorizontal.enabled = false;
-        meleeTriggerHitBoxVertical.enabled = false;
+		//meleeTriggerHitBoxHorizontal.enabled = false;
+        //meleeTriggerHitBoxVertical.enabled = false;
 
     }
 
 	void Start()
     {
 		anim = playerGameObject.GetComponent<Animator>();
+        audioSource = audioSourceObject.GetComponent<AudioSource>();
+
         player = GetComponent<Player>();
+        sheathedWeapon.SetActive(false);
+        mainWeapon.SetActive(true);
     }
 
     
@@ -69,7 +87,7 @@ public class PlayerAttack : MonoBehaviour {
         {
 
             //Regular attacks.
-            if (Input.GetButtonDown("Attack1") && player.slidingAgainstAWall == false && !currentlyInRangeMode)
+            if (Input.GetButtonDown("Attack1") && player.slidingAgainstAWall == false && !player.currentlyDodging  && meleeTimer <= 0)
             {
                 Attack();                
             }
@@ -149,8 +167,8 @@ public class PlayerAttack : MonoBehaviour {
                 {
                     anim.SetBool("Meleeing", false);
                     playerMeleeing = false;
-                    meleeTriggerHitBoxHorizontal.enabled = false;
-                    meleeTriggerHitBoxVertical.enabled = false;
+                    //meleeTriggerHitBoxHorizontal.enabled = false;
+                    //meleeTriggerHitBoxVertical.enabled = false;
                 }
             }
 
@@ -250,11 +268,13 @@ public class PlayerAttack : MonoBehaviour {
                 {
                     anim.Play("SwitchingFromRangedToMelee");
                     LoadMeleeAnimator();
+                    
                 }
                 else
                 {
                     anim.Play("SwitchingFromMeleeToRanged");
                     LoadRangedAnimator();
+                    
                 }
             }      
                 
@@ -279,21 +299,35 @@ public class PlayerAttack : MonoBehaviour {
     void Attack()
     {   
         playerMeleeing = true;
-        meleeTimer = meleeCD;
+        meleeTimer = meleeCoolDown;
         
         //If player is holding up, attack up.
         if (Input.GetAxis("Vertical") > 0.9f && Input.GetAxis("Horizontal") == 0)
         {
+            Collider2D[] enemiesToDamage = Physics2D.OverlapBoxAll(attackPosUp.position, new Vector2(attackRangeXUp, attackRangeYUp), 0, whatToHit);
+            for (int i = 0; i < enemiesToDamage.Length; i++)
+            {
+                enemiesToDamage[i].GetComponent<Enemy>().DamageEnemy(1, 2, false);
+
+                Debug.Log("Camera should be shaking!");
+            }
             AttackUp();
         }
         else if (!player.currentlyDucking) //Normal melee attacks.
         {
-            meleeTriggerHitBoxHorizontal.enabled = true;
+            //meleeTriggerHitBoxHorizontal.enabled = true;
+            Collider2D[] enemiesToDamage = Physics2D.OverlapBoxAll(attackPos.position, new Vector2(attackRangeX, attackRangeY), 0, whatToHit);
+            for (int i = 0; i < enemiesToDamage.Length; i++)
+            {
+                enemiesToDamage[i].GetComponent<Enemy>().DamageEnemy(1, 2, false);
+                
+                Debug.Log("Camera should be shaking!");
+            }
 
             switch (attackToUse)
             {
                 case 0:
-                    anim.Play("Melee3");
+                    anim.Play("Melee");
                     attackToUse = 1;
                     break;
                 case 1:
@@ -301,7 +335,7 @@ public class PlayerAttack : MonoBehaviour {
                     attackToUse = 2;
                     break;
                 case 2:
-                    anim.Play("Melee");
+                    anim.Play("Melee3");
                     attackToUse = 0;
                     break;
                 default:
@@ -312,13 +346,32 @@ public class PlayerAttack : MonoBehaviour {
         else
         {
             anim.Play("CrouchMelee");
+            Collider2D[] enemiesToDamage = Physics2D.OverlapBoxAll(attackPosCrouch.position, new Vector2(attackRangeXCrouch, attackRangeYCrouch), 0, whatToHit);
+            for (int i = 0; i < enemiesToDamage.Length; i++)
+            {
+                enemiesToDamage[i].GetComponent<Enemy>().DamageEnemy(1, 2, false);
 
+                Debug.Log("Camera should be shaking!");
+            }
         }
+
+        float randomSwingNoise = Random.Range(.75f, 1.25f);
+        PlaySwing(randomSwingNoise);
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.cyan;
+        Gizmos.DrawWireCube(attackPos.position, new Vector3(attackRangeX, attackRangeY, 1));
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireCube(attackPosCrouch.position, new Vector3(attackRangeXCrouch, attackRangeYCrouch, 1));
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireCube(attackPosUp.position, new Vector3(attackRangeXUp, attackRangeYUp, 1));
     }
 
     void AttackUp()
     {
-        meleeTriggerHitBoxVertical.enabled = true;
+        //meleeTriggerHitBoxVertical.enabled = true;
         anim.Play("MeleeUp");
         Debug.Log("Attacking Up!");            
     }
@@ -327,9 +380,9 @@ public class PlayerAttack : MonoBehaviour {
     {
         //TODO fix logic here so that meleeTrigger is enabled on release, not on hold.
 
-        meleeTriggerHitBoxHorizontal.enabled = true;
+        //meleeTriggerHitBoxHorizontal.enabled = true;
         playerMeleeing = true;
-        meleeTimer = meleeCD;
+        meleeTimer = meleeCoolDown;
         ChargeUpSpecialEffect();
                     
         anim.Play("MeleeCharge");         
@@ -339,9 +392,9 @@ public class PlayerAttack : MonoBehaviour {
     {
         //TODO fix logic here so that meleeTrigger is enabled on release, not on hold.
 
-        meleeTriggerHitBoxHorizontal.enabled = true;
+        //meleeTriggerHitBoxHorizontal.enabled = true;
         playerMeleeing = true;
-        meleeTimer = meleeCD;
+        meleeTimer = meleeCoolDown;
         ShootSpecialEffectUp();
 
         anim.Play("MeleeUp");
@@ -459,6 +512,16 @@ public class PlayerAttack : MonoBehaviour {
 
     }
 
+    public void PlaySwing(float pitch)
+    {
+        AudioClip audioClip = Instantiate(audioClips[0]);
+
+        audioSource.clip = audioClip;
+        audioSource.pitch = pitch;
+
+        audioSource.Play();
+    }
+
     void UpwardEffect()
     {
 
@@ -506,6 +569,9 @@ public class PlayerAttack : MonoBehaviour {
         //_animator.runtimeAnimatorController = (RuntimeAnimatorController)RuntimeAnimatorController.Instantiate(Resources.Load("Animation/PlayerMainStance", typeof(RuntimeAnimatorController)));
         anim.SetBool("InRangeMode", false);
         currentlyInRangeMode = false;
+        sheathedWeapon.gameObject.SetActive(false);
+        mainWeapon.gameObject.SetActive(true);
+        Debug.Log("I'm swapping to melee!");
     }
 
     void LoadRangedAnimator()
@@ -515,6 +581,10 @@ public class PlayerAttack : MonoBehaviour {
         anim.SetBool("InRangeMode", true);
 
         currentlyInRangeMode = true;
+        sheathedWeapon.gameObject.SetActive(true);
+        mainWeapon.gameObject.SetActive(false);
+        Debug.Log("I'm swapping to melee!");
+
     }
 }
 

@@ -27,23 +27,27 @@ public class EnemyProjectiles : MonoBehaviour {
 		Destroy (gameObject, bulletDespawn);
 	}
 
-
-
-    void OnCollisionEnter2D (Collision2D other)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
+        if (collision.gameObject.tag == "Player")
+        {
+            Destroy(gameObject);
 
-		if (other.gameObject.tag == "Player" )
-		{
-            Destroy (gameObject);
-            
-		}
+        }
 
-        if (other.gameObject.tag == "GrabWall" || other.gameObject.tag == "Wall")
+        if (collision.gameObject.tag == "GrabWall" || collision.gameObject.tag == "Wall")
         {
             //Debug.Log("You shot a wall!");
             //Destroy (gameObject);
             moveSpeed = 0;
             Destroy(gameObject, .5f);
         }
+    }
+
+
+    void OnTriggerEnter2D (Collision2D other)
+    {
+
+		
     }
 }

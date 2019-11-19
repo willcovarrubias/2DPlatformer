@@ -116,10 +116,10 @@ TextureImporter:
       name: SwingTest_0
       rect:
         serializedVersion: 2
-        x: 131
-        y: 41
-        width: 108
-        height: 151
+        x: 0
+        y: 0
+        width: 134
+        height: 256
       alignment: 9
       pivot: {x: 0.9412661, y: 0.75616574}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -136,7 +136,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: df34473a666a39f4ca00f8bac8dff1fa
     internalID: 0
     vertices: []
     indices: 

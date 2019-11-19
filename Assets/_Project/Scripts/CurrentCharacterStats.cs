@@ -18,7 +18,7 @@ public class CurrentCharacterStats : MonoBehaviour {
 
     Controller2D controller;
     Player player;
-    Rigidbody2D rigidBody;
+    Rigidbody2D rigidbody2D;
     Animator anim;
 
     CharacterManager characterManager;
@@ -44,6 +44,7 @@ public class CurrentCharacterStats : MonoBehaviour {
 
     private float iFrameTimer = 2f;
     public float iFrameDuration;
+    public float knockBackAmount;
 
     private void Awake()
     {
@@ -57,7 +58,7 @@ public class CurrentCharacterStats : MonoBehaviour {
         statsText = GameObject.FindGameObjectWithTag("DevUI").GetComponent<Text>();
         controller = GetComponent<Controller2D>();
         player = GetComponent<Player>();
-        rigidBody = GetComponent<Rigidbody2D>();
+        rigidbody2D = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
 
         characterManager = GameObject.FindGameObjectWithTag("GM").GetComponent<CharacterManager>();
@@ -207,83 +208,112 @@ public class CurrentCharacterStats : MonoBehaviour {
 
     void KnockToTheLeft()
     {
-        if (player.slidingAgainstAWall)
-        {
-            player.velocity.y = 0;
+        player.velocity.x =-knockBackAmount;   
+        //controller.Move(new Vector3(-knockBackAmount, 0,0), true);
+        //rigidbody2D.AddForce(new Vector2(-knockBackAmount, knockBackAmount));
+        //rigidbody2D.AddForce(new Vector2(-knockBackAmount, knockBackAmount), ForceMode2D.Force);
 
-            if (controller.collisions.left)
-                controller.Move(new Vector3(2, 0, 0), true);
-            else if (controller.collisions.right)
-                controller.Move(new Vector3(-2, 0, 0), true);
-            else
-                controller.Move(new Vector3(2, 0, 0), true);
-        }
-        else
-        {
-            player.velocity.y = 8;
-            controller.Move(new Vector3(1, 0, 0), true);
-        }
-               
-            
     }
 
     void KnockToTheRight()
     {
-        if (player.slidingAgainstAWall)
-        {
-            player.velocity.y = 0;
+        player.velocity.x = knockBackAmount;
+        //controller.Move(new Vector3(knockBackAmount, 0, 0), true);
+        //rigidbody2D.AddForce(new Vector2(knockBackAmount, knockBackAmount), ForceMode2D.Force);
 
-            if(controller.collisions.left)
-                controller.Move(new Vector3(2, 0, 0), true);
-            else if(controller.collisions.right)
-                controller.Move(new Vector3(-2, 0, 0), true);
-            else
-                controller.Move(new Vector3(-2, 0, 0), true);
-        }
-        else
-        {
-            player.velocity.y = 8;
-            controller.Move(new Vector3(-1, 0, 0), true);
-        }
-        
     }
 
 
 
 
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if ((collision.gameObject.tag == "EnemyProjectile" || collision.gameObject.tag == "Enemy") && !player.playerisDead )
-        {
-            if (iFrameTimer <= 0)
-            {
-                iFrameTimer = iFrameDuration;
-                DamagePlayer(50);
+    //private void OnTriggerEnter2D(Collision2D collision)
+    //{
+    //    if ((collision.gameObject.tag == "EnemyProjectile" || collision.gameObject.tag == "Enemy") && !player.playerisDead )
+    //    {
+    //        Debug.Log("Collided with Enemy Weapon using OnCollisionEnter2D!");
+    //        if (iFrameTimer <= 0)
+    //        {
+    //            iFrameTimer = iFrameDuration;
+    //            DamagePlayer(0);
 
-                var relativePosition = collision.GetContact(0);
-                Vector2 positionOfHit = relativePosition.point;
+    //            var relativePosition = collision.GetContact(0);
+    //            Vector2 positionOfHit = relativePosition.point;
 
-                Debug.Log(relativePosition.point);
+    //            Debug.Log(relativePosition.point);
 
-                if (positionOfHit.x < transform.position.x)
-                {
-                    KnockToTheLeft();
-                }
-                else if (positionOfHit.x > transform.position.x)
-                {
-                    KnockToTheRight();
-                }
-            }          
-        }
+    //            if (positionOfHit.x < transform.position.x)
+    //            {
+    //                KnockToTheRight();
+    //            }
+    //            else if (positionOfHit.x > transform.position.x)
+    //            {
+    //                KnockToTheLeft();
+    //            }
+    //        }          
+    //    }
 
         
-    }
+    //}
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "Spikes"  && !player.playerisDead)
+        if ((collision.gameObject.tag == "Spikes" || collision.gameObject.tag == "EnemyProjectile") && !player.playerisDead)
         {
-            
+            //Debug.Log("Collided with Enemy Weapon using OnTriggerEnter2D!");
+            Debug.Log("Collided with Enemy Proj using OnCollisionEnter2D!");
+
+            if (iFrameTimer <= 0)
+            {
+                if (collision.transform.position.x < player.transform.position.x) //Being shot from the  left.
+                {
+                    KnockToTheRight();
+                    //Debug.Log("Knock to the left from spikes!");
+                }
+                else if (collision.transform.position.x > player.transform.position.x) //Being shot from the right.
+                {
+                    KnockToTheLeft();
+                    //Debug.Log("Knock to the right from spikes!");
+
+                }
+                //Debug.Log("I'm taking damange from spikes!");
+                DamagePlayer(1);
+                iFrameTimer = iFrameDuration;
+            }
+        }
+    }
+
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if ((collision.gameObject.tag == "Spikes" || collision.gameObject.tag == "Enemy") && !player.playerisDead)
+        {
+            Debug.Log("Collided with Enemy Weapon using OnTriggerStay2D!");
+
+            if (iFrameTimer <= 0)
+            {
+                if (collision.transform.position.x < player.transform.position.x) //Being shot from the  left.
+                {
+                    KnockToTheLeft();
+                    Debug.Log("Knock to the left from spikes!");
+                }
+                else if (collision.transform.position.x > player.transform.position.x) //Being shot from the right.
+                {
+                    KnockToTheRight();
+                    Debug.Log("Knock to the right from spikes!");
+
+                }
+                Debug.Log("I'm taking damange from spikes!");
+                DamagePlayer(1);
+                iFrameTimer = iFrameDuration;
+            }
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if ((collision.gameObject.tag == "Spikes" || collision.gameObject.tag == "Enemy") && !player.playerisDead)
+        {
+            Debug.Log("Collided with Enemy Weapon using OnTriggerExit2D!");
+
             if (iFrameTimer <= 0)
             {
                 if (collision.transform.position.x < player.transform.position.x) //Being shot from the  left.

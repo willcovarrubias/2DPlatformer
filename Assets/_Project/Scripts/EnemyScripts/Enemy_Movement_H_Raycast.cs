@@ -47,15 +47,18 @@ public class Enemy_Movement_H_Raycast : MonoBehaviour {
 	void Update()
 	{
         //Vector2 input = new Vector2(1, 1);
-        if (velocity.x > 0)
-            FaceRight();
-        else if (velocity.x < 0)
-            FaceLeft();
 
-
+        
         //TODO fix this since it creates an exception error since it can't find Player right away.
         if (playerTarget != null && !enemy_Main.enemyIsStunned)
         {
+            IsPlayerLeftOfTarget();
+
+            if (velocity.x > 0)
+                FaceRight();
+            else if (velocity.x < 0)
+                FaceLeft();
+
             input = new Vector2(playerTarget.transform.position.x - transform.position.x, 0);
 
             float targetVelocityX = input.x * movementSpeed;
@@ -64,9 +67,7 @@ public class Enemy_Movement_H_Raycast : MonoBehaviour {
 
             velocity.y += gravity * Time.deltaTime;
             velocity.x = Mathf.SmoothDamp(velocity.x, targetVelocityX, ref velocityXSmoothing, (controller.collisions.below) ? accelerationTimeGrounded : accelerationTimeAirborne);
-
-
-
+                        
 
             if (Mathf.Abs(playerTarget.transform.position.x - transform.position.x) < 100)
             {
@@ -80,83 +81,83 @@ public class Enemy_Movement_H_Raycast : MonoBehaviour {
 
         }
 
+        
+
         //int wallDirX = (controller.collisions.left) ? -1 : 1;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
         //FollowPlayer();
     }
-    
-   /* void FixedUpdate()
-	{
-		FollowPlayer();
+
+    public bool IsPlayerLeftOfTarget()
+    {
+        while (playerTarget.transform.position.x >= transform.position.x)
+        {
+            return true;
+        }
+        return false;
+
+    }
+
+    /* void FixedUpdate()
+     {
+         FollowPlayer();
 
 
-		Vector3 dir =  new Vector3(playerTarget.transform.position.x - transform.position.x, 0, 0);
-		dir *= movementSpeed * Time.deltaTime;
+         Vector3 dir =  new Vector3(playerTarget.transform.position.x - transform.position.x, 0, 0);
+         dir *= movementSpeed * Time.deltaTime;
 
-		var left = transform.TransformDirection (Vector2.left) * 20;
-		var right = transform.TransformDirection (Vector2.right) * 20;
+         var left = transform.TransformDirection (Vector2.left) * 20;
+         var right = transform.TransformDirection (Vector2.right) * 20;
 
-		RaycastHit2D hitLeft = Physics2D.Raycast (transform.position, left,  20, whatToHit);
-		Debug.DrawRay (transform.position, left, Color.red);
-		if (hitLeft.collider != null) 
-		{
-			Debug.DrawLine (transform.position, hitLeft.point, Color.cyan);
-			//Debug.Log ("Hitting Character with Raycast!");
-			transform.Translate(dir);
-			if(Time.time > nextFire)
-			{    
-				nextFire = Time.time + fireRate;
-				Debug.Log ("Shoot!");
+         RaycastHit2D hitLeft = Physics2D.Raycast (transform.position, left,  20, whatToHit);
+         Debug.DrawRay (transform.position, left, Color.red);
+         if (hitLeft.collider != null) 
+         {
+             Debug.DrawLine (transform.position, hitLeft.point, Color.cyan);
+             //Debug.Log ("Hitting Character with Raycast!");
+             transform.Translate(dir);
+             if(Time.time > nextFire)
+             {    
+                 nextFire = Time.time + fireRate;
+                 Debug.Log ("Shoot!");
 
-				FireEnemyBulletLeft();
-			}
-		}
+                 FireEnemyBulletLeft();
+             }
+         }
 
-		RaycastHit2D hitRight = Physics2D.Raycast (transform.position, right,  20, whatToHit);
-		Debug.DrawRay (transform.position, right, Color.red);
-		if (hitRight.collider != null) 
-		{
-			Debug.DrawLine (transform.position, hitRight.point, Color.cyan);
-			//Debug.Log ("Hitting Character with Raycast!");
-			transform.Translate(dir);
-			/*if(Time.time > nextFire)
-			{    
-				nextFire = Time.time + fireRate;
-				Debug.Log ("Shoot!");
+         RaycastHit2D hitRight = Physics2D.Raycast (transform.position, right,  20, whatToHit);
+         Debug.DrawRay (transform.position, right, Color.red);
+         if (hitRight.collider != null) 
+         {
+             Debug.DrawLine (transform.position, hitRight.point, Color.cyan);
+             //Debug.Log ("Hitting Character with Raycast!");
+             transform.Translate(dir);
+             /*if(Time.time > nextFire)
+             {    
+                 nextFire = Time.time + fireRate;
+                 Debug.Log ("Shoot!");
 
-				FireEnemyBulletLeft();
-			}
-		}
+                 FireEnemyBulletLeft();
+             }
+         }
 
-		//enemyRB.AddForce(dir, fMode);
-		//
-
-
+         //enemyRB.AddForce(dir, fMode);
+         //
 
 
-	}*/
+
+
+     }*/
 
     void FindPlayer()
     {
         playerTarget = GameObject.FindGameObjectWithTag("Player");
+    }
+
+    private void AttackPlayer()
+    {
     }
 
 	void FollowPlayer()
@@ -175,8 +176,6 @@ public class Enemy_Movement_H_Raycast : MonoBehaviour {
 			//	//Debug.Log ("Facing left!");
 			facingRight = false;
 		}
-
-
 	}
 
 

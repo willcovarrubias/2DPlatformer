@@ -1,0 +1,415 @@
+fileFormatVersion: 2
+guid: 45a7fedc99d5fff47bd2da70dc7720a9
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -6313205723872470966
+    second: Shadow_Armorxcf_0
+  - first:
+      213: 2660778908097944708
+    second: Shadow_Armorxcf_1
+  - first:
+      213: 189412359887799439
+    second: Shadow_Armorxcf_2
+  - first:
+      213: -5532285466818331578
+    second: Shadow_Armorxcf_3
+  - first:
+      213: 6406886196589287433
+    second: Shadow_Armorxcf_4
+  - first:
+      213: -4358268740315829147
+    second: Shadow_Armorxcf_5
+  - first:
+      213: -5804296102582894252
+    second: Shadow_Armorxcf_6
+  - first:
+      213: -5882322518676933600
+    second: Shadow_Armorxcf_7
+  - first:
+      213: 6660337420117907021
+    second: Shadow_Armorxcf_8
+  - first:
+      213: 6532789997157246499
+    second: Shadow_Armorxcf_9
+  - first:
+      213: 6897700103955587944
+    second: Shadow_Armorxcf_10
+  - first:
+      213: -2429745442487241359
+    second: Shadow_Armorxcf_11
+  externalObjects: {}
+  serializedVersion: 10
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: -1
+    aniso: -1
+    mipBias: -100
+    wrapU: 1
+    wrapV: 1
+    wrapW: -1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 128
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Windows Store Apps
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Shadow_Armorxcf_0
+      rect:
+        serializedVersion: 2
+        x: 21
+        y: 19
+        width: 24
+        height: 40
+      alignment: 9
+      pivot: {x: 0.44720778, y: 0.8642662}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 872730c534fbbc84d8ca061621a40cc2
+      internalID: -6313205723872470966
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shadow_Armorxcf_1
+      rect:
+        serializedVersion: 2
+        x: 69
+        y: 26
+        width: 26
+        height: 28
+      alignment: 9
+      pivot: {x: 0.32131928, y: 0.7247932}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c3c453322126c1247982f300a1704753
+      internalID: 2660778908097944708
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shadow_Armorxcf_2
+      rect:
+        serializedVersion: 2
+        x: 129
+        y: 26
+        width: 26
+        height: 28
+      alignment: 9
+      pivot: {x: 0.2834584, y: 0.76245826}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 484b1cda77f9c8a478d7e7c41c8a3e30
+      internalID: 189412359887799439
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shadow_Armorxcf_3
+      rect:
+        serializedVersion: 2
+        x: 168
+        y: 150
+        width: 61
+        height: 82
+      alignment: 9
+      pivot: {x: 0.39614668, y: 0.09826418}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 40988f19b72baff4981026c2874a0f8e
+      internalID: -5532285466818331578
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shadow_Armorxcf_4
+      rect:
+        serializedVersion: 2
+        x: 19
+        y: 72
+        width: 53
+        height: 45
+      alignment: 9
+      pivot: {x: 0.6739646, y: 0.8367759}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2425512a00628c2499891de86c4e0eb8
+      internalID: 6406886196589287433
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shadow_Armorxcf_5
+      rect:
+        serializedVersion: 2
+        x: 84
+        y: 72
+        width: 53
+        height: 45
+      alignment: 9
+      pivot: {x: 0.2824795, y: 0.8537879}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ab5ed9838dad266419b7b8f559471e6c
+      internalID: -4358268740315829147
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shadow_Armorxcf_6
+      rect:
+        serializedVersion: 2
+        x: 5
+        y: 120
+        width: 123
+        height: 136
+      alignment: 9
+      pivot: {x: 0.5154514, y: 0.17703584}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 981c13d53713de047a23423c5b488e3f
+      internalID: -5804296102582894252
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shadow_Armorxcf_7
+      rect:
+        serializedVersion: 2
+        x: 158
+        y: 90
+        width: 65
+        height: 48
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8cc6e9c9802a8e64fb6f055f352f1e12
+      internalID: -5882322518676933600
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shadow_Armorxcf_8
+      rect:
+        serializedVersion: 2
+        x: 159
+        y: 32
+        width: 37
+        height: 50
+      alignment: 9
+      pivot: {x: 0.44458875, y: 0.8860547}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fbe79c02e0f20b74f8f4d1d7d3f9c438
+      internalID: 6660337420117907021
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shadow_Armorxcf_9
+      rect:
+        serializedVersion: 2
+        x: 212
+        y: 31
+        width: 23
+        height: 48
+      alignment: 9
+      pivot: {x: 0.54607755, y: 0.8952114}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f253650048f98d144b972613b25bc211
+      internalID: 6532789997157246499
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shadow_Armorxcf_10
+      rect:
+        serializedVersion: 2
+        x: 158
+        y: 9
+        width: 28
+        height: 14
+      alignment: 9
+      pivot: {x: 0.34860176, y: 0.8027955}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 27f59d1afd7216b42ae3e25fc52d8b76
+      internalID: 6897700103955587944
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shadow_Armorxcf_11
+      rect:
+        serializedVersion: 2
+        x: 213
+        y: 9
+        width: 28
+        height: 14
+      alignment: 9
+      pivot: {x: 0.34481648, y: 0.8633547}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a18664ba7d4e017458c2b06658e6e519
+      internalID: -2429745442487241359
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

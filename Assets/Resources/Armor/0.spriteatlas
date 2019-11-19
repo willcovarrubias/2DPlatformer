@@ -41,14 +41,14 @@ SpriteAtlas:
       enableRotation: 1
       enableTightPacking: 1
     variantMultiplier: 1
-    packables:
-    - {fileID: 21300000, guid: 3cdf53db03c546149ba1effdbc8340bf, type: 3}
-    totalSpriteSurfaceArea: 1280
+    packables: []
+    totalSpriteSurfaceArea: 0
     bindAsDefault: 1
+    storedHash:
+      serializedVersion: 2
+      Hash: a80ebf82cc1c21b0023c4c4a7fc8d4aa
   m_MasterAtlas: {fileID: 0}
-  m_PackedSprites:
-  - {fileID: 21300000, guid: 3cdf53db03c546149ba1effdbc8340bf, type: 3}
-  m_PackedSpriteNamesToIndex:
-  - Bow
+  m_PackedSprites: []
+  m_PackedSpriteNamesToIndex: []
   m_Tag: 0
   m_IsVariant: 0

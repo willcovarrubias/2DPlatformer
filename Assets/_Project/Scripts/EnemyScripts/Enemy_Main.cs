@@ -4,8 +4,12 @@ using System.Collections;
 public class Enemy_Main : MonoBehaviour {
 
     private Enemy_Movement_H_Raycast enemyMovementController;
+    private Controller2D controller;
+    private Animator anim;
+    private Rigidbody2D rigidbody2D;
     private float enemyStunTimer = 1f;
     public bool enemyIsStunned = false;
+    public float knockBackAmount;
 
 	[System.Serializable]
 	public class EnemyStats {
@@ -18,6 +22,9 @@ public class Enemy_Main : MonoBehaviour {
     private void Start()
     {
         enemyMovementController = this.GetComponent<Enemy_Movement_H_Raycast>();
+        controller = GetComponent<Controller2D>();
+        rigidbody2D = GetComponent<Rigidbody2D>();
+        anim = GetComponent<Animator>();
     }
 
     void DamageEnemy (int damage)
@@ -26,10 +33,9 @@ public class Enemy_Main : MonoBehaviour {
         enemyIsStunned = true;
         enemyStunTimer = 0;
         stats.Health -= damage;
-        if (enemyMovementController.facingRight)
-            enemyMovementController.velocity = new Vector2(3, 5);
-        else
-            enemyMovementController.velocity = new Vector2(-3, 5);
+        anim.Play("TakingDamage");
+        
+        //        enemyMovementController.velocity = new Vector2(-3, 5);
 
         //	if(stats.Health <= 0)
         //	{
@@ -58,6 +64,14 @@ public class Enemy_Main : MonoBehaviour {
         {
             enemyStunTimer += Time.deltaTime;
         }
+
+        //if (enemyIsStunned)
+        //{
+        //    if (enemyMovementController.facingRight)
+        //        controller.Move(new Vector3(1, 50, 0) * Time.deltaTime, new Vector2(1, 50), true);
+        //    else
+        //        controller.Move(new Vector3(1, 50, 0) * Time.deltaTime, new Vector2(1, 50), true);
+        //}
         
 
 	}
@@ -74,6 +88,14 @@ public class Enemy_Main : MonoBehaviour {
             //Camera2DFollow.xPosRestriction = 3;
             //Camera2DFollow.xPosRestrictionRight = 0;
             Debug.Log("Collided with Player's weapon!");
+
+            //var moveDirection = transform.position.x  - collision.transform.position.x;
+
+            if(!enemyMovementController.IsPlayerLeftOfTarget())
+                rigidbody2D.AddForce(new Vector2(knockBackAmount, 100));
+            else
+                rigidbody2D.AddForce(new Vector2(-knockBackAmount, 100));
+
             DamageEnemy(1);
         }
 
